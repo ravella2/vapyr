@@ -1,0 +1,58 @@
+{% extends 'vapyr_app/index.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+<div class="section">
+<div class="container games">
+    <div class="section center"><h2>Currently Playing</h2></div>
+{% for game in games  %}
+
+{% if game.prefer %}
+
+<div class="row">
+        <div class="col l3">
+                <img class="responsive-img" src="{{game.gameKey.image}}">
+            </div>
+            <div class="col l6">
+                <h5>{{game.gameKey.title}}</h5>
+                <p>{{game.gameKey.description}}</p>
+            </div>
+            <div class="col l3">
+                <ul>
+                    <li>Platform: {{game.gameKey.platform}}</li>
+                    <li>Genre: {{game.gameKey.genre}}</li>
+                    <li>Rating: {{game.gameKey.rating}}/5</li>
+
+                </ul>
+            </div>
+        </div>
+    <div class="divider"></div>
+    {% endif %}
+    {% endfor %}
+    <div class="center section"><h2>Wishlist</h2></div>
+    {% for game in games  %}
+    {% if game.wishlist %}
+    <div class="row">
+                <div class="col l3">
+                    <img class="responsive-img" src="{{game.gameKey.image}}">
+                </div>
+                <div class="col l6">
+                    <h5>{{game.gameKey.title}}</h5>
+                    <p>{{game.gameKey.description}}</p>
+                </div>
+                <div class="col l3">
+                    <ul>
+                        <li>Platform: {{game.gameKey.platform}}</li>
+                        <li>Genre: {{game.gameKey.genre}}</li>
+                        <li>Rating: {{game.gameKey.rating}}/5</li>
+                        <li>Wishlist: {{game.prefer}}</li>
+                    </ul>
+                </div>
+            </div>
+        <div class="divider"></div>
+        {% endif %}
+        {% endfor %}
+</div>
+</div>
+{% endblock content %}

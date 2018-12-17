@@ -1,20 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Game, UserProfile, JoinTable
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 import requests
 
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html' )
+    return render(request, 'vapyr_app/main.html' )
 
-# def get_games(year, author):
-#     url = 'http://api.example.com/books' 
-#     params = {'year': year, 'author': author}
-#     r = requests.get(url, params=params)
-#     books = r.json()
-#     books_list = {'books':books['results']}
-#     return books_list
-# req = requests.request('GET', 'https://www.giantbomb.com/api/games/?api_key=c77e7c6a04f3b3c695be65884c6ddebd6d900f70&format=json&platforms=146&sort=original_release_date:desc')
+def show(request, username):
+    user = User.objects.get(username=username)
+    profile = UserProfile.objects.get(user_id=user)
+    games = JoinTable.objects.filter(userKey=profile)
+    
+        
+    
 
-
-# print(req.json())
+    return render(request, 'vapyr_app/profile.html', {'user':user, 'games':games, 'profile':profile})
