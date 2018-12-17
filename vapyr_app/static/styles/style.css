@@ -8,14 +8,20 @@ nav .right{
     top: 0px;
     right: 0px;
 }
+.page-footer, nav{
+    background-color: lightslategray
+}
 
 body{
     background-image: url('/static/images/vapor-background-11.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover
+    background-size: cover;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
-.container{
+.games{
     background-color: whitesmoke
 }
 .nav-wrapper form{
@@ -51,6 +57,11 @@ nav .right .imgProfil a{
     display: none;
 }
 
-.row{
-    margin-bottom: 0px !important;
+
+main {
+    flex: 1 0 auto;
+}
+
+.row.responsive_img{
+    max-height: 200px !important;
 }

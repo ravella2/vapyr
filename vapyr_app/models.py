@@ -29,8 +29,8 @@ class Game(models.Model):
 
 
 class JoinTable(models.Model):
-    userKey = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='user')
-    gameKey = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='game')
+    userKey = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='users')
+    gameKey = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='games')
     prefer = models.BooleanField()
     wishlist = models.BooleanField()
 

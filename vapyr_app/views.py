@@ -1,16 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Game, UserProfile, JoinTable
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 import requests
 
 # Create your views here.
 
 def index(request):
-    url = 'https://www.giantbomb.com/api/games/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=JSON'
+    return render(request, 'vapyr_app/main.html' )
 
-    headers = {'Access-Control-Allow-Origin': 'true', 'Accept': 'application/json'}
+def show(request, username):
+    user = User.objects.get(username=username)
+    profile = UserProfile.objects.get(user_id=user)
+    games = JoinTable.objects.filter(userKey=profile)
+    
+        
+    
 
-    # r = requests.get(url, headers=headers)
-    print('testing123')
-    # print(r.text)
-
-    return render(request, 'vapyr_app/index.html' )
+    return render(request, 'vapyr_app/profile.html', {'user':user, 'games':games, 'profile':profile})

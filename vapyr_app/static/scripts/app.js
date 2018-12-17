@@ -24,7 +24,8 @@ $(document).ready(function(){
                     <a class="waves-effect waves-light btn">Add to Games List</a>
                     <a class="waves-effect waves-light btn">Add to Wishlist</a>
                 </div>
-            </div>`
+            </div>
+            <div class="divider"></div>`
             $('.container').append(card1)
         })
     }
