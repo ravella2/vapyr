@@ -4,8 +4,16 @@ import requests
 
 # Create your views here.
 
-def index(request):
-    return render(request, 'index.html' )
+# def index(request):
+    # url = 'https://www.giantbomb.com/api/games/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=JSON'
+
+    # headers = {'Access-Control-Allow-Origin': 'true', 'Accept': 'application/json'}
+
+    # # r = requests.get(url, headers=headers)
+    # print('testing123')
+    # # print(r.text)
+
+    # return render(request, 'vapyr_app/index.html' )
 
 # def get_games(year, author):
 #     url = 'http://api.example.com/books' 
