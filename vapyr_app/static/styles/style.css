@@ -1,0 +1,56 @@
+nav{
+    padding: 0 10px 0 10px;
+
+}
+
+nav .right{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+body{
+    background-image: url('/static/images/vapor-background-11.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover
+}
+.container{
+    background-color: whitesmoke
+}
+.nav-wrapper form{
+    margin-left: 55%;
+    width: 25%;
+}
+.card{
+    margin: 18px !important;
+}
+
+.nav-wrapper .input-field{
+    padding-top: 7px;
+}
+
+.nav-wrapper form #search{
+    height: 50px;
+}
+
+
+nav .right img{
+    margin: 17px;
+    height: 30px;
+    width: 30px;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+nav .right .imgProfil a{
+    height: 64px;
+}
+
+.hidden{
+    display: none;
+}
+
+.row{
+    margin-bottom: 0px !important;
+}
