@@ -37,6 +37,11 @@
                 <ul class="right">
                     <li><a href="#">Browse?</a></li>
                     <li><a href="user/{{user}}">Profile</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'user_logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a class="navbar-link" href="{% url 'user_login' %}">Login</a></li>
+                {% endif %}
                 </ul>
             </div>
         </nav>
