@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Game, UserProfile, JoinTable
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
 import requests
 
 # Create your views here.

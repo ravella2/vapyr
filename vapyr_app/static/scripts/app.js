@@ -5,7 +5,8 @@ $(document).ready(function(){
     $.ajax({
         method: 'GET',
         url: recentGameUrl,
-        success: handleS
+        success: handleS,
+      
     });
 
     function handleS(games){
