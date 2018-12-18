@@ -1,11 +1,14 @@
 $(document).ready(function(){
 
-    var recentGameUrl = 'https://www.giantbomb.com/api/games/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=JSON&sort=original_release_date:desc&filter=original_release_date:1700-01-01|2018-12-17&limit=10'
+    var recentGameUrl = 'https://www.giantbomb.com/api/games/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=jsonp&sort=original_release_date:desc&filter=original_release_date:1700-01-01|2018-12-17&limit=10'
 
     $.ajax({
         method: 'GET',
         url: recentGameUrl,
-        success: handleS
+        success: handleS,
+        dataType: 'jsonp',
+        jsonp: 'json_callback',
+        crossDomain: true,
     });
 
     function handleS(games){
