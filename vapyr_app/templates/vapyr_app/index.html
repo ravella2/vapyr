@@ -18,6 +18,7 @@
         </script>
         <script type="text/javascript" src="{% static '/scripts/materialize.min.js' %}"></script>
         <!-- <script type="text/javascript" src="{% static '/scripts/app.js'%}"></script> -->
+        <script type="text/javascript" src="{% static '/scripts/app.js'%}" defer></script>
 </head>
 
 <body>
@@ -40,10 +41,13 @@
             </div>
         </nav>
     </div>
-    <div class="container games">
+   
+            
+        {% block content%}
+        {% endblock %}
 
     </div>
-    <script type="text/javascript" src="{% static '/scripts/app.js'%}"></script>
+    
 </body>
 </html>
 
