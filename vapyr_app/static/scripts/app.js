@@ -1,16 +1,18 @@
 $(document).ready(function(){
 
-    var recentGameUrl = 'https://www.giantbomb.com/api/games/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=JSON&sort=original_release_date:desc&filter=original_release_date:1700-01-01%7C2018-12-17&limit=10'
+    var recentGameUrl = 'https://www.giantbomb.com/api/games/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=jsonp&sort=original_release_date:desc&filter=original_release_date:1700-01-01|2018-12-17&limit=10'
 
     $.ajax({
         method: 'GET',
         url: recentGameUrl,
         success: handleS,
-      
+        dataType: 'jsonp',
+        jsonp: 'json_callback',
+        crossDomain: true,
     });
 
     function handleS(games){
-        $('.container').empty();
+        $('.games').empty();
         games.results.forEach(result => {
             let card1 = `
             <div class= "row">
@@ -27,7 +29,7 @@ $(document).ready(function(){
                 </div>
             </div>
             <div class="divider"></div>`
-            $('.container').append(card1)
+            $('.games').append(card1)
         })
     }
 

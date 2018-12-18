@@ -21,9 +21,10 @@ body{
     min-height: 100vh;
     flex-direction: column;
 }
-.games{
-    background-color: whitesmoke
+.games, .profile{
+    background-color: whitesmoke;
 }
+
 .nav-wrapper form{
     margin-left: 55%;
     width: 25%;
