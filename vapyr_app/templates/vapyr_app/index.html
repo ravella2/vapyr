@@ -9,8 +9,7 @@
         <!--Import materialize.css-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+        <link href="https://fonts.googleapis.com/css?family=Courgette|Pontano+Sans" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="{% static '/styles/materialize.min.css' %}"  media="screen,projection"/>
         <link rel="stylesheet" type="text/css" href="{% static '/styles/style.css' %}">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -25,7 +24,7 @@
     <div class="navbar-fixed">
         <nav>
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo hide-on-small-only">Logo</a>
+                <a href="/" class="brand-logo hide-on-small-only">Vapyr</a>
                 </ul>
                     <form action="" method="post">
                         <div class="input-field">
@@ -35,18 +34,19 @@
                         </div>
                     </form>
                 <ul class="right">
-                    <li><a href="#">Browse?</a></li>
+                    <li><a href="/">Browse</a></li>
                     <li><a href="user/{{user}}">Profile</a></li>
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'user_logout' %}">Logout</a></li>
                     {% else %}
                     <li><a class="navbar-link" href="{% url 'user_login' %}">Login</a></li>
+                    <li><a class="navbar-link" href="{% url 'register' %}">Register</a></li>
                 {% endif %}
                 </ul>
             </div>
         </nav>
     </div>
-   
+
             
         {% block content%}
         {% endblock %}

@@ -1,6 +1,9 @@
+*{
+    font-family: 'Pontano Sans', sans-serif;
+}
 nav{
     padding: 0 10px 0 10px;
-
+    
 }
 
 nav .right{
@@ -50,19 +53,27 @@ nav .right img{
     cursor: pointer;
 }
 
-nav .right .imgProfil a{
-    height: 64px;
-}
-
 .hidden{
     display: none;
 }
 
 
 main {
-    flex: 1 0 auto;
+flex: 1 0 auto;
 }
 
 .row.responsive_img{
-    max-height: 200px !important;
+    margin-top: 20px !important;
+}
+
+.gamerow{
+    margin-bottom: 0px !important;
+}
+
+.btn{
+    margin-top: 10px;
+}
+
+.brand-logo{
+    font-family: 'Courgette', cursive;
 }

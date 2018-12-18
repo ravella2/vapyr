@@ -15,17 +15,18 @@ $(document).ready(function(){
         $('.games').empty();
         games.results.forEach(result => {
             let card1 = `
-            <div class= "row">
-                <div class="col l3">
+            <div class= "row gamerow valign-wrapper ">
+                <div class="col l3 ">
                     <img class="responsive-img" src="${result.image.screen_url}">
                 </div>
                 <div class="col l6">
                     <h5>${result.name}</h5>
                     <p>${result.deck}</p>
                 </div>
-                <div class="col l3">
-                    <a class="waves-effect waves-light btn">Add to Games List</a>
-                    <a class="waves-effect waves-light btn">Add to Wishlist</a>
+                <div class="col l3 valign-wrapper">
+                    <ul>
+                    <li><a class="waves-effect waves-light center-align grey btn">Add to Games List</a></li>
+                    <li><a class="waves-effect waves-light center-align grey btn">Add to Wishlist</a></li>
                 </div>
             </div>
             <div class="divider"></div>`

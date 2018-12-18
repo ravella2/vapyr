@@ -4,13 +4,15 @@
 
 {% block content %}
 <div class="section">
-<div class="container profile">
-    <div class="section center"><h2>Currently Playing</h2></div>
+    <div class="container profile">
+        <div class="section center"><h2>Currently Playing</h2>
+        </div>
+        <div class="divider"></div>
 {% for game in games  %}
 
 {% if game.prefer %}
 
-<div class="row">
+<div class="row gamerow valign-wrapper">
         <div class="col l3">
                 <img class="responsive-img" src="{{game.gameKey.image}}">
             </div>
@@ -23,7 +25,6 @@
                     <li>Platform: {{game.gameKey.platform}}</li>
                     <li>Genre: {{game.gameKey.genre}}</li>
                     <li>Rating: {{game.gameKey.rating}}/5</li>
-
                 </ul>
             </div>
         </div>
@@ -31,9 +32,11 @@
     {% endif %}
     {% endfor %}
     <div class="center section"><h2>Wishlist</h2></div>
+
+    <div class="divider"></div>
     {% for game in games  %}
     {% if game.wishlist %}
-    <div class="row">
+    <div class="row valign-wrapper">
                 <div class="col l3">
                     <img class="responsive-img" src="{{game.gameKey.image}}">
                 </div>
