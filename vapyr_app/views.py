@@ -52,7 +52,6 @@ def edit_game(request, pk):
     return render(request, 'vapyr_app/editform.html', {'form': form})
 
 
-
 def show(request, username):
     user = User.objects.get(username=username)
     profile = UserProfile.objects.get(user_id=user)
