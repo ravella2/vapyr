@@ -61,18 +61,21 @@ $(document).ready(function(){
             $('.games').empty();
             results = games.results;
             games.results.forEach(result => {
+                releaseDate= result.original_release_date.split(' ')[0]
                 let card1 = `
-                <div class= "row">
-                    <div class="col l3">
-                        <img class="responsive-img" src="${result.image.screen_url}">
+                <div class= "row gamerow valign-wrapper ">
+                    <div class="col l3 ">
+                        <a target="_blank" href="${result.site_detail_url}"><img class="responsive-img" src="${result.image.screen_url}"></a>
                     </div>
                     <div class="col l6">
-                        <h5>${result.name}</h5>
+                        <h5>${result.name}</h5><h6>Released: ${releaseDate}</h6>
                         <p>${result.deck}</p>
                     </div>
-                    <div class="col l3">
-                        <a class="${result.id} waves-effect waves-light btn" id='add-current'>Add to Games List</a>
-                        <a class="${result.id} waves-effect waves-light btn" id='add-wish'>Add to Wishlist</a>
+                    <div class="col l3 valign-wrapper">
+                        <ul>
+                            <li><a class="${result.id} waves-effect waves-light center-align light-blue darken-4 btn" id='add-current'>Add to Games List</a></li>
+                            <li><a class="${result.id} waves-effect waves-light center-align light-blue darken-4 btn" id='add-wish'>Add to Wishlist</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="divider"></div>`
