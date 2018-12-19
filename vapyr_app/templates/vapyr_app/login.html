@@ -1,17 +1,37 @@
 {% extends 'vapyr_app/index.html' %}
 {% block content %}
-<div class="container">
-    <div class="row">
-    <h1>Login here :</h1>
-        <form method="post" action="{% url 'user_login' %}">
-        {% csrf_token %}
-        {# A more "HTML" way of creating the login form#}
-        <label for="username">Username:</label>
-        <input type="text" name="username" placeholder="Username">
-        <label for="password">Password:</label>
-        <input type="password" name="password" placeholder="Password">
-        <input type="submit" name="" value="Login">
-        </form>
-    </div>
-    </div>
+<div class="row">
+        <div class="col s12 l4 offset-l4">
+          <div class="card grey lighten-3">
+            <div class="card-content">
+              <h4 class="card-title center-align">Login</h4>
+              <form method="post" action="{% url 'user_login' %}">
+                    {% csrf_token %}
+                <div class="row">
+                  <div class="input-field col s12">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" placeholder="Username">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" placeholder="Password">
+                  </div>
+                </div>
+                <div class="row center-align">
+                  <button class="btn waves-effect waves-light light-blue darken-4" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+        
+
 {% endblock %}
+

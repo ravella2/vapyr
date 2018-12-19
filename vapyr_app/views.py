@@ -74,6 +74,7 @@ def register(request):
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
+   
     return render(request, 'vapyr_app/registration.html', {'user_form':user_form,'profile_form':profile_form,'registered':registered})
 
 def user_login(request):
@@ -93,4 +94,11 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'vapyr_app/login.html', {})
+
+def move_game(request):
+    
+    game_id = request.GET['game_id']
+    print(game_id)
+    return HttpResponse(request, 'vapyr_app/profile.html')
+
 
