@@ -1,0 +1,22 @@
+{% extends "vapyr_app/index.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+    <div class="row white">
+    {% if registered %}
+        <h3>Personalize your homepage</h3>
+        <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            {{ profile_form.as_p }}
+            <input type="submit" name="" value="New Profile">
+        </form>
+    
+    
+    
+    {% else %}
+    <a href="{% url 'register' %}"><h2> You don't have an account yet! Click here to register. </h2></a>
+    
+    {% endif %}
+    </div>
+</div>
+{% endblock %} 

@@ -24,8 +24,7 @@
     <div class="navbar-fixed ">
         <nav class=" light-blue darken-4">
             <div class="nav-wrapper">
-                <a href="/" class="brand-logo center hide-on-small-only">Vapyr</a>
-                </ul>
+                <a href="/" class="brand-logo center hide-on-small-only">Vapyr</a>  
                     <form action="" method="post">
                         <div class="input-field">
                             <input id="search" type="search" name="search">
@@ -35,7 +34,7 @@
                     </form>
                 <ul class="right">
                     <li><a href="/">Browse</a></li>
-                    <li><a href="/user/{{user}}">Profile</a></li>
+                    <li><a href="/profile/user/{{user}}">Profile</a></li>
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'user_logout' %}">Logout</a></li>
                     {% else %}

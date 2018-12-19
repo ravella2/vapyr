@@ -3,21 +3,16 @@
 {% block content %}
 <div class="container">
     <div class="row white">
-    {% if registered %}
-
-    <h1>Thank you for registering!</h1>
-    
-    {% else %}
+   
     
     <h3>Register Here</h3>
         <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-        <input type="submit" name="" value="Register">
+        <input href="{% url 'register' %}" type="submit" name="" value="Register">
         </form>
         
-    {% endif %}
+
     </div>
 </div>
 {% endblock %} 

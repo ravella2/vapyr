@@ -30,6 +30,7 @@ $(document).ready(function(){
                     <ul>
                     <li><a class="waves-effect waves-light center-align light-blue darken-4 btn">Add to Games List</a></li>
                     <li><a class="waves-effect waves-light center-align light-blue darken-4 btn">Add to Wishlist</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="divider"></div>`
