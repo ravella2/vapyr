@@ -1,27 +1,42 @@
 from django.shortcuts import render, redirect
 from .models import Game, UserProfile, JoinTable
-from vapyr_app.forms import UserForm, UserProfileForm
+from vapyr_app.forms import UserForm, UserProfileForm, GameForm
 from django.contrib.auth.models import User
 import requests
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.csrf import csrf_exempt
+from django.template.loader import render_to_string
 
 # Create your views here.
 
 def index(request):
     return render(request, 'vapyr_app/main.html' )
 
+
+@csrf_exempt
+def game_create(request):
+    if request.method == 'POST':
+        form = GameForm(request.POST)
+        if form.is_valid():
+            game = form.save()
+            join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=True, wishlist=False)
+            games = JoinTable.objects.filter(userKey=request.user.profile)    
+            return HttpResponse(request.user.username)
+    return HttpResponse('')
+
+
 def show(request, username):
     user = User.objects.get(username=username)
     profile = UserProfile.objects.get(user_id=user)
     games = JoinTable.objects.filter(userKey=profile)
     return render(request, 'vapyr_app/profile.html', {'user':user, 'games':games, 'profile':profile})
-<<<<<<< HEAD
-=======
+
 @login_required
 def special(request):
     return HttpResponse("You are logged in !")
+
 @login_required
 def user_logout(request):
     logout(request)
@@ -57,7 +72,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return redirect('index')
+                return redirect('show')
             else:
                 return HttpResponse("Your account was inactive.")
         else:
@@ -66,5 +81,4 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'vapyr_app/login.html', {})
->>>>>>> 95d0bd39917dc4b69a2d91b1915476a9fc9f80df
 

@@ -1,5 +1,8 @@
+var results = []
 $(document).ready(function(){
 
+
+    //Populate newest games to landing page//
     var recentGameUrl = 'https://www.giantbomb.com/api/games/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=jsonp&sort=original_release_date:desc&filter=original_release_date:1700-01-01|2018-12-17&limit=10'
 
     $.ajax({
@@ -14,6 +17,7 @@ $(document).ready(function(){
 
     function handleS(games){
         $('.games').empty();
+        results = games.results;
         games.results.forEach(result => {
             let card1 = `
             <div class= "row">
@@ -25,7 +29,7 @@ $(document).ready(function(){
                     <p>${result.deck}</p>
                 </div>
                 <div class="col l3">
-                    <a class="waves-effect waves-light btn" id='add-current'>Add to Games List</a>
+                    <a class="${result.id} waves-effect waves-light btn" id='add-current'>Add to Games List</a>
                     <a class="waves-effect waves-light btn add-wish">Add to Wishlist</a>
                 </div>
             </div>
@@ -33,15 +37,6 @@ $(document).ready(function(){
             $('.games').append(card1)
         })
     }
-
-    $('.games').one('click','#add-current', function(e){
-        e.preventDefault();
-        let gameData = $(this).data()
-
-        console.log(gameData)
-
-    });
-
 
     $('form').on('submit', function(e){
         e.preventDefault();
@@ -60,6 +55,7 @@ $(document).ready(function(){
 
         function onSuccess(games) {
             $('.games').empty();
+            results = games.results;
             games.results.forEach(result => {
                 let card1 = `
                 <div class= "row">
@@ -71,7 +67,7 @@ $(document).ready(function(){
                         <p>${result.deck}</p>
                     </div>
                     <div class="col l3">
-                        <a class="waves-effect waves-light btn" id='add-current'>Add to Games List</a>
+                        <a class="${result.id} waves-effect waves-light btn" id='add-current'>Add to Games List</a>
                         <a class="waves-effect waves-light btn add-wish">Add to Wishlist</a>
                     </div>
                 </div>
@@ -81,4 +77,46 @@ $(document).ready(function(){
 
         }
     })
+
+    //Add game to user's currently playing list//
+    $('.games').one('click','#add-current', function(e){
+        e.preventDefault();
+        let gameData = this.className.split(" ");
+        
+        var gameObj = results.find(result => {
+            return result.id==gameData[0]
+        })
+
+        let gameModel = {
+            "title": gameObj.name,
+            "image": gameObj.image.screen_url,
+            "platform": gameObj.platforms[0].name,
+            "genre": "Unknown",
+            "description": gameObj.deck,
+            "rating":0,
+        }
+        
+        console.log('gameModel');
+
+        $.ajax({
+            method: 'POST',
+            url: 'game/create',
+            data: gameModel,
+            success: onSuccess,
+        })
+
+        function onSuccess(response) {
+            console.log(response);
+            if(response){
+                window.location.href = 'user/'+response; 
+            }
+            else{
+                window.location.href = '/'
+            }
+            
+            // window.location.replace(response);
+        }
+
+
+    });
 });
