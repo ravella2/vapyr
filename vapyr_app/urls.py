@@ -12,5 +12,6 @@ urlpatterns = [
     path('game/wish', views.game_wish, name='game_wish'),
     path('register',views.register, name='register'),
     path('move_game',views.move_game, name='move_game'),
+    path('game/<int:pk>/edit', views.edit_game, name='edit_game'),
 ]
 

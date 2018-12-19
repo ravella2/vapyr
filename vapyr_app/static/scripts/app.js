@@ -42,7 +42,7 @@ $(document).ready(function(){
         })
     }
 
-    $('form').on('submit', function(e){
+    $('.search').on('submit', function(e){
         e.preventDefault();
 
         let gameSearch = $('#search').val();
@@ -118,9 +118,11 @@ $(document).ready(function(){
                 window.location.href = 'user/'+response; 
             }
             else{
-                window.location.href = '/'
+                alert('Game already in Currently Playing List!')
+                // window.location.href = '/'
             }
         }
+
     });
 
     //Add game to user's wishlist//
@@ -154,7 +156,8 @@ $(document).ready(function(){
                 window.location.href = 'user/'+response; 
             }
             else{
-                window.location.href = '/'
+                alert('game already in list!')
+                // window.location.href = '/'
             }
         }
     })

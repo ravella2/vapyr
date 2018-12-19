@@ -1,0 +1,11 @@
+{% extends 'vapyr_app/index.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <h1>Edit Game</h1>
+    <form enctype="multipart/form-data" method="POST" class="game-form">
+        {{ form }}
+        <button type="submit" value="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}

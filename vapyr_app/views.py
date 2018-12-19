@@ -38,6 +38,20 @@ def game_wish(request):
     return HttpResonse('')
 
 
+@csrf_exempt
+def edit_game(request, pk):
+    game = Game.objects.get(pk=pk)
+    if request.method == "POST":
+        print('HEPL ME PLZ')
+        form = GameForm(request.POST, instance=game)
+        if form.is_valid():
+            game = form.save()
+            return redirect('show', username=request.user.username)
+    else:
+        form = GameForm(instance=game)
+    return render(request, 'vapyr_app/editform.html', {'form': form})
+
+
 
 def show(request, username):
     user = User.objects.get(username=username)
