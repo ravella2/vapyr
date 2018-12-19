@@ -66,3 +66,10 @@ def user_login(request):
     else:
         return render(request, 'vapyr_app/login.html', {})
 
+def move_game(request):
+    
+    game_id = request.GET['game_id']
+    print(game_id)
+    return HttpResponse(request, 'vapyr_app/profile.html')
+
+

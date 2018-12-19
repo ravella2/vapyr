@@ -11,9 +11,7 @@ nav .right{
     top: 0px;
     right: 0px;
 }
-.page-footer, nav{
-    background-color: lightslategray
-}
+
 
 body{
     background-image: url('/static/images/vapor-background-11.jpg');
@@ -75,5 +73,9 @@ flex: 1 0 auto;
 }
 
 .brand-logo{
+    font-family: 'Courgette', cursive;
+}
+
+span.logo-font{
     font-family: 'Courgette', cursive;
 }
