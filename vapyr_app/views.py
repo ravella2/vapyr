@@ -26,6 +26,18 @@ def game_create(request):
             return HttpResponse(request.user.username)
     return HttpResponse('')
 
+@csrf_exempt
+def game_wish(request):
+    if request.method == 'POST':
+        form = GameForm(request.POST)
+        if form.is_valid():
+            game = form.save()
+            join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=False, wishlist=True)
+            games = JoinTable.objects.filter(userKey=request.user.profile)
+            return HttpResponse(request.user.username)
+    return HttpResonse('')
+
+
 
 def show(request, username):
     user = User.objects.get(username=username)

@@ -30,7 +30,7 @@ $(document).ready(function(){
                 </div>
                 <div class="col l3">
                     <a class="${result.id} waves-effect waves-light btn" id='add-current'>Add to Games List</a>
-                    <a class="waves-effect waves-light btn add-wish">Add to Wishlist</a>
+                    <a class="${result.id} waves-effect waves-light btn" id='add-wish'>Add to Wishlist</a>
                 </div>
             </div>
             <div class="divider"></div>`
@@ -68,7 +68,7 @@ $(document).ready(function(){
                     </div>
                     <div class="col l3">
                         <a class="${result.id} waves-effect waves-light btn" id='add-current'>Add to Games List</a>
-                        <a class="waves-effect waves-light btn add-wish">Add to Wishlist</a>
+                        <a class="${result.id} waves-effect waves-light btn" id='add-wish'>Add to Wishlist</a>
                     </div>
                 </div>
                 <div class="divider"></div>`
@@ -79,7 +79,7 @@ $(document).ready(function(){
     })
 
     //Add game to user's currently playing list//
-    $('.games').one('click','#add-current', function(e){
+    $('.games').on('click','#add-current', function(e){
         e.preventDefault();
         let gameData = this.className.split(" ");
         
@@ -95,8 +95,8 @@ $(document).ready(function(){
             "description": gameObj.deck,
             "rating":0,
         }
-        
-        console.log('gameModel');
+
+        console.log(gameModel);
 
         $.ajax({
             method: 'POST',
@@ -113,10 +113,42 @@ $(document).ready(function(){
             else{
                 window.location.href = '/'
             }
-            
-            // window.location.replace(response);
+        }
+    });
+
+    //Add game to user's wishlist//
+    $('.games').on('click', '#add-wish', function(e) {
+        e.preventDefault();
+        let gameData = this.className.split(" ");
+        
+        var gameObj = results.find(result => {
+            return result.id==gameData[0]
+        })
+
+        let gameModel = {
+            "title": gameObj.name,
+            "image": gameObj.image.screen_url,
+            "platform": gameObj.platforms[0].name,
+            "genre": "Unknown",
+            "description": gameObj.deck,
+            "rating":0,
         }
 
+        $.ajax({
+            method: 'POST',
+            url: 'game/wish',
+            data: gameModel,
+            success: onSuccess,
+        })
 
-    });
+        function onSuccess(response) {
+            console.log(response);
+            if(response){
+                window.location.href = 'user/'+response; 
+            }
+            else{
+                window.location.href = '/'
+            }
+        }
+    })
 });
