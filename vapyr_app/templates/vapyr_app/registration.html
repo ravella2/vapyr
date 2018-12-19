@@ -1,0 +1,18 @@
+{% extends "vapyr_app/index.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+    <div class="row white">
+   
+    
+    <h3>Register Here</h3>
+        <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        <input href="{% url 'register' %}" type="submit" name="" value="Register">
+        </form>
+        
+
+    </div>
+</div>
+{% endblock %} 

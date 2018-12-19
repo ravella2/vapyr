@@ -1,0 +1,81 @@
+*{
+    font-family: 'Pontano Sans', sans-serif;
+}
+nav{
+    padding: 0 10px 0 10px;
+    
+}
+
+nav .right{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+
+body{
+    background-image: url('/static/images/vapor-background-11.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+.games, .profile{
+    background-color: whitesmoke;
+}
+
+.nav-wrapper form{
+    margin-left: 55%;
+    width: 25%;
+}
+.card{
+    margin: 18px !important;
+}
+
+.nav-wrapper .input-field{
+    padding-top: 7px;
+}
+
+.nav-wrapper form #search{
+    height: 50px;
+}
+
+
+nav .right img{
+    margin: 17px;
+    height: 30px;
+    width: 30px;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+.hidden{
+    display: none;
+}
+
+
+main {
+flex: 1 0 auto;
+}
+
+.row.responsive_img{
+    margin-top: 20px !important;
+}
+
+.gamerow{
+    margin-bottom: 0px !important;
+}
+
+.btn{
+    margin-top: 10px;
+}
+
+.brand-logo{
+    font-family: 'Courgette', cursive;
+}
+
+span.logo-font{
+    font-family: 'Courgette', cursive;
+}

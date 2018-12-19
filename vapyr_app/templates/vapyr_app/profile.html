@@ -1,0 +1,61 @@
+{% extends 'vapyr_app/index.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+<div class="section">
+    <div class="container profile">
+        <div class="section center"><h2>Currently Playing</h2>
+        </div>
+        <div class="divider"></div>
+{% for game in games  %}
+
+{% if game.prefer %}
+
+<div class="row gamerow">
+        <div class="col s12 m3 l3 center">
+                <img class="responsive-img" src="{{game.gameKey.image}}">
+            </div>
+            <div class="col s8 m6 l6 ">
+                <h5>{{game.gameKey.title}}</h5>
+                <p>{{game.gameKey.description}}</p>
+            </div>
+            <div class="col s4 m3 l3 valign-wrapper">
+                <ul>
+                    <li>Platform: {{game.gameKey.platform}}</li>
+                    <li>Genre: {{game.gameKey.genre}}</li>
+                    <li>Rating: {{game.gameKey.rating}}/5</li>
+                </ul>
+            </div>
+        </div>
+    <div class="divider"></div>
+    {% endif %}
+    {% endfor %}
+    <div class="center section"><h2>Wishlist</h2></div>
+
+    <div class="divider"></div>
+    {% for game in games  %}
+    {% if game.wishlist %}
+    <div class="row valign-wrapper">
+                <div class="col l3">
+                    <img class="responsive-img" src="{{game.gameKey.image}}">
+                </div>
+                <div class="col l6">
+                    <h5>{{game.gameKey.title}}</h5>
+                    <p>{{game.gameKey.description}}</p>
+                </div>
+                <div class="col l3">
+                    <ul>
+                        <li>Platform: {{game.gameKey.platform}}</li>
+                        <li>Genre: {{game.gameKey.genre}}</li>
+                        <li>Rating: {{game.gameKey.rating}}/5</li>
+                        <a href="#" class="btn light-blue darken-4 btn-primary addToWishList" data-id="{{game.pk}}">Add to Current Games</a>
+                    </ul>
+                </div>
+            </div>
+        <div class="divider"></div>
+        {% endif %}
+        {% endfor %}
+</div>
+</div>
+{% endblock content %}

@@ -14,7 +14,12 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+TEMPLATE_DIR = os.path.join(BASE_DIR,'vapyr_app/templates')
+STATIC_DIR = os.path.join(BASE_DIR,'vapyr_app/static')
+MEDIA_DIR = os.path.join(BASE_DIR,'vapyr_app/media')
+TEMPLATE_DIR = os.path.join(BASE_DIR,'auth_app/templates')
+STATIC_DIR = os.path.join(BASE_DIR,'auth_app/static')
+MEDIA_DIR = os.path.join(BASE_DIR,'auth_app/media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -37,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'vapyr_app'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +81,8 @@ WSGI_APPLICATION = 'vapyr.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'vapyr',
     }
 }
 
@@ -118,3 +124,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [STATIC_DIR,]
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = '/media/'
+LOGIN_URL = '/vapyr_app/user_login/'
+LOGOUT_URL = '/vapyr_app/user_logout/'
+CORS_ORIGIN_ALLOW_ALL = True
+
