@@ -46,7 +46,7 @@ $(document).ready(function(){
         e.preventDefault();
 
         let gameSearch = $('#search').val();
-        let gameUrl = `https://www.giantbomb.com/api/search/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=jsonp&resources=game&query=${gameSearch}`
+        let gameUrl = `https://www.giantbomb.com/api/search/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=jsonp&resources=game&query=${gameSearch}&limit=20`
 
         $.ajax({
             method:'GET',
