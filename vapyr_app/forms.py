@@ -1,5 +1,5 @@
 from django import forms
-from vapyr_app.models import UserProfile
+from vapyr_app.models import UserProfile, Game
 from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):
@@ -9,8 +9,17 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username','password','email')
 
-class UserProfileForm(forms.ModelForm):
 
+class UserProfileForm(forms.ModelForm):
     class Meta():
         model = UserProfile
-        fields = ('gamer_style','pref_platform','profile_pic')
+        fields = ('user_id','gamer_style','pref_platform','profile_pic')
+        # exclude = ('user_id',)
+
+        
+
+class GameForm(forms.ModelForm):
+
+    class Meta:
+        model = Game
+        fields= ('title', 'image', 'platform', 'genre', 'description', 'rating')

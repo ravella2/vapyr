@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 nav{
     padding: 0 10px 0 10px;
 
+=======
+*{
+    font-family: 'Pontano Sans', sans-serif;
+}
+nav{
+    padding: 0 10px 0 10px;
+    
+>>>>>>> master
 }
 
 nav .right{
@@ -8,9 +17,13 @@ nav .right{
     top: 0px;
     right: 0px;
 }
+<<<<<<< HEAD
 .page-footer, nav{
     background-color: lightslategray
 }
+=======
+
+>>>>>>> master
 
 body{
     background-image: url('/static/images/vapor-background-11.jpg');
@@ -50,19 +63,46 @@ nav .right img{
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 nav .right .imgProfil a{
     height: 64px;
 }
 
+=======
+>>>>>>> master
 .hidden{
     display: none;
 }
 
 
 main {
+<<<<<<< HEAD
     flex: 1 0 auto;
 }
 
 .row.responsive_img{
     max-height: 200px !important;
+=======
+flex: 1 0 auto;
+}
+
+.row.responsive_img{
+    margin-top: 20px !important;
+}
+
+.gamerow{
+    margin-bottom: 0px !important;
+}
+
+.btn{
+    margin-top: 10px;
+}
+
+.brand-logo{
+    font-family: 'Courgette', cursive;
+}
+
+span.logo-font{
+    font-family: 'Courgette', cursive;
+>>>>>>> master
 }

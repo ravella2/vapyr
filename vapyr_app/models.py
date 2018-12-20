@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class UserProfile(models.Model):
-    user_id = models.OneToOneField(User,on_delete=models.CASCADE)
+    user_id = models.OneToOneField(User,on_delete=models.CASCADE, related_name="profile")
     profile_pic = models.ImageField(upload_to='profile_pics',blank=True)
     pref_platform = models.CharField(max_length=100)
     GAMER_STYLES = (
@@ -33,5 +33,6 @@ class JoinTable(models.Model):
     gameKey = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='games')
     prefer = models.BooleanField()
     wishlist = models.BooleanField()
-
-
+    
+    def __str__(self):
+        return self.userKey.user_id.username + " " + self.gameKey.title

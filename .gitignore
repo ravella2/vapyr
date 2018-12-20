@@ -103,6 +103,10 @@ celerybeat-schedule
 # Environments
 .env
 .venv
+<<<<<<< HEAD
+=======
+.vscode
+>>>>>>> master
 env/
 venv/
 ENV/

@@ -2,23 +2,17 @@
 {% load staticfiles %}
 {% block content %}
 <div class="container">
-    <div class="row">
-    {% if registered %}
-
-    <h1>Thank you for registering!</h1>
+    <div class="row white">
+   
     
-    {% else %}
-    
-    <h1>Register Here</h1>
-        <h3>Just fill out the form.</h3>
+    <h3>Register Here</h3>
         <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-        <input type="submit" name="" value="Register">
+        <input href="{% url 'register' %}" type="submit" name="" value="Register">
         </form>
         
-    {% endif %}
+
     </div>
 </div>
 {% endblock %} 
