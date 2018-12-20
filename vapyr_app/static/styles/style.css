@@ -1,15 +1,21 @@
+
+nav{
+    padding: 0 10px 0 10px;
+
+}
 *{
     font-family: 'Pontano Sans', sans-serif;
 }
-nav{
-    padding: 0 10px 0 10px;
-    
-}
+
 
 nav .right{
     position: absolute;
     top: 0px;
     right: 0px;
+}
+
+.page-footer, nav{
+    background-color: lightslategray
 }
 
 
@@ -51,12 +57,22 @@ nav .right img{
     cursor: pointer;
 }
 
+
+nav .right .imgProfil a{
+    height: 64px;
+}
+
 .hidden{
     display: none;
 }
 
 
 main {
+flex: 1 0 auto;
+}
+
+.row.responsive_img{
+
 flex: 1 0 auto;
 }
 
@@ -78,4 +94,16 @@ flex: 1 0 auto;
 
 span.logo-font{
     font-family: 'Courgette', cursive;
+
+}
+
+.game-form{
+    width: 50vw;
+    background-color: whitesmoke;
+    padding: .3em;
+
+}
+
+select{
+    display: initial !important;
 }

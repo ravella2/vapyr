@@ -1,26 +1,73 @@
 from django.shortcuts import render, redirect
 from .models import Game, UserProfile, JoinTable
-from vapyr_app.forms import UserForm, UserProfileForm
+from vapyr_app.forms import UserForm, UserProfileForm, GameForm
 from django.contrib.auth.models import User
 import requests
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.csrf import csrf_exempt
+from django.template.loader import render_to_string
 
 # Create your views here.
 
 def index(request):
     return render(request, 'vapyr_app/main.html' )
 
+
+@csrf_exempt
+def game_create(request):
+    if request.method == 'POST':
+        form = GameForm(request.POST)
+        if form.is_valid():
+            game = form.save()
+            join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=True, wishlist=False)
+            games = JoinTable.objects.filter(userKey=request.user.profile)    
+            return HttpResponse(request.user.username)
+    return HttpResponse('')
+
+@csrf_exempt
+def game_wish(request):
+    if request.method == 'POST':
+        form = GameForm(request.POST)
+        if form.is_valid():
+            game = form.save()
+            join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=False, wishlist=True)
+            games = JoinTable.objects.filter(userKey=request.user.profile)
+            return HttpResponse(request.user.username)
+    return HttpResponse('')
+
+
+@csrf_exempt
+def edit_game(request, pk):
+    game = Game.objects.get(pk=pk)
+    if request.method == "POST":
+        print('HEPL ME PLZ')
+        form = GameForm(request.POST, instance=game)
+        if form.is_valid():
+            game = form.save()
+            return redirect('show', username=request.user.username)
+    else:
+        form = GameForm(instance=game)
+    return render(request, 'vapyr_app/editform.html', {'form': form})
+
+
+@csrf_exempt
+def delete_game(request, pk):
+    Game.objects.get(id=pk).delete()
+    return redirect('show', username=request.user.username)
+
 def show(request, username):
     user = User.objects.get(username=username)
     profile = UserProfile.objects.get(user_id=user)
     games = JoinTable.objects.filter(userKey=profile)
     return render(request, 'vapyr_app/profile.html', {'user':user, 'games':games, 'profile':profile})
+
 @login_required
 def special(request):
     return HttpResponse("You are logged in !")
+
 @login_required
 def user_logout(request):
     logout(request)
@@ -40,6 +87,7 @@ def register(request):
     else:
         user_form = UserForm()
         return render(request, 'vapyr_app/registration.html', {'user_form':user_form})
+    return render(request, 'vapyr_app/registration.html', {'user_form':user_form})
 
 def new_profile(request, username):
     if request.method == 'POST':
@@ -62,14 +110,16 @@ def new_profile(request, username):
             return render(request, 'vapyr_app/new_profile.html', {'profile_form':profile_form, 'registered': False})
 
 def user_login(request):
+    
     if request.method == 'POST':
+        print('test')
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
         if user:
             if user.is_active:
                 login(request,user)
-                return redirect('index')
+                return redirect('profile/user/'+username) 
             else:
                 return HttpResponse("Your account was inactive.")
         else:
@@ -78,11 +128,3 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'vapyr_app/login.html', {})
-
-def move_game(request):
-    
-    game_id = request.GET['game_id']
-    print(game_id)
-    return HttpResponse(request, 'vapyr_app/profile.html')
-
-
