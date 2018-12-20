@@ -1,6 +1,11 @@
 var results = []
+<<<<<<< HEAD
 //Populate preferred platform games to landing page//
 var recentGameUrl = 'https://www.giantbomb.com/api/games/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=jsonp&sort=original_release_date:desc&filter=original_release_date:1700-01-01|2018-12-17&filter=platforms:${userPlatform}&limit=40'
+=======
+//Populate newest games to landing page//
+var recentGameUrl = 'https://www.giantbomb.com/api/games/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=jsonp&sort=original_release_date:desc&filter=original_release_date:1700-01-01|2018-12-17&limit=40'
+>>>>>>> 3fa695c968a4c14a96766c760681bd6ee9f20d94
 
 $.ajax({
     method: 'GET',
