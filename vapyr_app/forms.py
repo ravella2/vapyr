@@ -13,7 +13,7 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta():
         model = UserProfile
-        fields = ('user_id','gamer_style','pref_platform','profile_pic')
+        fields = ('gamer_style','pref_platform','profile_pic')
 
 class GameForm(forms.ModelForm):
 

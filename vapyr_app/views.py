@@ -17,28 +17,32 @@ def index(request):
 
 
 @csrf_exempt
-def game_create(request):
+def game_create(request, title):
     if request.method == 'POST':
         form = GameForm(request.POST)
-        print('test')
-        print(form)
         if form.is_valid():
-            game = form.save() #error happens here
-            print(game)
+            game = form.save() 
             join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=True, wishlist=False)
-            games = JoinTable.objects.filter(userKey=request.user.profile)    
+            
+            return HttpResponse(request.user.username)
+        else:
+            game = Game.objects.get(title=title)
+            join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=True, wishlist=False)   
             return HttpResponse(request.user.username)
     return HttpResponse('')
 
 @csrf_exempt
-def game_wish(request):
-    print(request)
+def game_wish(request, title):
     if request.method == 'POST':
         form = GameForm(request.POST)
         if form.is_valid():
             game = form.save()
             join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=False, wishlist=True)
             games = JoinTable.objects.filter(userKey=request.user.profile)
+            return HttpResponse(request.user.username)
+        else:
+            game = Game.objects.get(title=title)
+            join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=True, wishlist=False)   
             return HttpResponse(request.user.username)
     return HttpResponse('')
 
@@ -55,7 +59,6 @@ def game_list_toggle(request, pk):
 def edit_game(request, pk):
     game = Game.objects.get(pk=pk)
     if request.method == "POST":
-        print('HEPL ME PLZ')
         form = GameForm(request.POST, instance=game)
         if form.is_valid():
             game = form.save()
@@ -86,40 +89,59 @@ def user_logout(request):
     return redirect('index')
 
 def register(request):
+    
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
-        if user_form.is_valid():
+        profile_form = UserProfileForm(data=request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
-            return redirect('profile/'+user.username)
+
+            profile = profile_form.save(commit=False)
+            profile.user_id = user
+            ids = [{"console": "Switch", "gid": 157}, {"console": "PS4", "gid": 146}, {"console": "PC", "gid": 94}, {"console": "XboxOne", "gid": 145}]
+            setID = 'no pref'
+            for di in ids :
+                print(di)
+                for key in di :
+                    print(di[key])
+                    if di[key] == profile.pref_platform :
+                        setID = di['gid']
+                        print('HERE IS THE ID')
+                        print(setID)
+                        profile.pref_plat_id = setID
+            profile.save()
+
+            return redirect('user_login')
         else:
             print(user_form.errors)
-            return render(request, 'vapyr_app/registration.html', {'user_form':user_form}, {'error':'invalid'})
+            return render(request, 'vapyr_app/registration.html', {'user_form':user_form, 'profile_form':profile_form}, {'error':'invalid'})
     else:
         user_form = UserForm()
-        return render(request, 'vapyr_app/registration.html', {'user_form':user_form})
-    return render(request, 'vapyr_app/registration.html', {'user_form':user_form})
-
-def new_profile(request, username):
-    if request.method == 'POST':
-        profile_form = UserProfileForm(data=request.POST)
-        if profile_form.is_valid():
-            profile_form['user_id'].initial = request.user
-            profile = profile_form.save()
-            return redirect('user/'+username)
-        
-            # if 'profile_pic' in request.FILES:
-            #     profile.profile_pic = request.FILES['profile_pic']
-            # profile.save()
-        else:
-            print(profile_form.errors)
-    else:
         profile_form = UserProfileForm()
-        if(username):
-            return render(request, 'vapyr_app/new_profile.html', {'profile_form':profile_form, 'registered': True})
-        else:
-            return render(request, 'vapyr_app/new_profile.html', {'profile_form':profile_form, 'registered': False})
+        return render(request, 'vapyr_app/registration.html', {'user_form':user_form, 'profile_form':profile_form})
+
+# def new_profile(request, username):
+#     if request.method == 'POST':
+#         profile_form = UserProfileForm(data=request.POST)
+#         if profile_form.is_valid():
+#             profile = profile_form.save(commit=False)
+#             profile.user_id = request.user
+#             profile.save()
+#             return redirect()
+        
+#             # if 'profile_pic' in request.FILES:
+#             #     profile.profile_pic = request.FILES['profile_pic']
+#             # profile.save()
+#         else:
+#             print(profile_form.errors)
+#     else:
+#         profile_form = UserProfileForm()
+#         if(username):
+#             return render(request, 'vapyr_app/new_profile.html', {'profile_form':profile_form, 'registered': True})
+#         else:
+#             return render(request, 'vapyr_app/new_profile.html', {'profile_form':profile_form, 'registered': False})
 
 def user_login(request):
     

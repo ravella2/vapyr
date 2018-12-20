@@ -1,6 +1,6 @@
 var results = []
-//Populate newest games to landing page//
-var recentGameUrl = 'https://www.giantbomb.com/api/games/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=jsonp&sort=original_release_date:desc&filter=original_release_date:1700-01-01|2018-12-17&limit=40'
+//Populate preferred platform games to landing page//
+var recentGameUrl = 'https://www.giantbomb.com/api/games/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=jsonp&sort=original_release_date:desc&filter=original_release_date:1700-01-01|2018-12-17'
 
 $.ajax({
     method: 'GET',
@@ -17,7 +17,7 @@ function handleS(games){
 
     results = games.results;
     games.results.forEach(result => {
-        releaseDate= result.original_release_date.split(' ')[0]
+        releaseDate = result.original_release_date.split(' ')[0]
         let card1 = `
         <div class= "row gamerow valign-wrapper ">
             <div class="col l3 ">

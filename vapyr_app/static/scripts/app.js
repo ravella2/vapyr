@@ -1,47 +1,6 @@
 var results = []
 $(document).ready(function(){
 
-
-    // //Populate newest games to landing page//
-    // var recentGameUrl = 'https://www.giantbomb.com/api/games/?api_key=6e0060f42d81f489256e472989988c2b69e0eacc&format=jsonp&sort=original_release_date:desc&filter=original_release_date:1700-01-01|2018-12-17&limit=40'
-
-    // $.ajax({
-    //     method: 'GET',
-    //     url: recentGameUrl,
-    //     success: handleS,
-    //     dataType: 'jsonp',
-    //     jsonp: 'json_callback',
-    //     crossDomain: true,
-    // });
-
-
-    // function handleS(games){
-    //     $('.games').empty();
-    //     results = games.results;
-    //     games.results.forEach(result => {
-    //         releaseDate= result.original_release_date.split(' ')[0]
-    //         let card1 = `
-    //         <div class= "row gamerow valign-wrapper ">
-    //             <div class="col l3 ">
-    //                 <a target="_blank" href="${result.site_detail_url}"><img class="responsive-img" src="${result.image.screen_url}"></a>
-    //             </div>
-    //             <div class="col l6">
-    //                 <h5>${result.name}</h5><h6>Released: ${releaseDate}</h6>
-    //                 <p>${result.deck}</p>
-    //             </div>
-    //             <div class="col l3 valign-wrapper">
-    //                 <ul>
-    //                     <li><a class="${result.id} waves-effect waves-light center-align light-blue darken-4 btn" id='add-current'>Add to Games List</a></li>
-    //                     <li><a class="${result.id} waves-effect waves-light center-align light-blue darken-4 btn" id='add-wish'>Add to Wishlist</a></li>
-    //                 </ul>
-    //             </div>
-    //         </div>
-    //         <div class="divider"></div>`
-    //         $('.games').append(card1)
-            
-    //     })
-    // }
-
     //Search Functionality//
     $('.search').on('submit', function(e){
         e.preventDefault();
@@ -61,9 +20,9 @@ $(document).ready(function(){
         function onSuccess(games) {
             $('.games').empty();
             results = games.results;
-            
             games.results.forEach(result => {
-                releaseDate= result.original_release_date.split(' ')[0]
+                if (result.original_release_date){
+                releaseDate= result.original_release_date.split(' ')[0]}
                 let card1 = `
                 <div class= "row gamerow valign-wrapper ">
                     <div class="col l3 ">
@@ -92,7 +51,6 @@ $(document).ready(function(){
     $('.games').on('click','#add-current', function(e){
         e.preventDefault();
         let gameData = this.className.split(" ");
-    
         var gameObj = results.find(result => {
             return result.id==gameData[0]
         })
@@ -107,10 +65,10 @@ $(document).ready(function(){
         }
 
         console.log(gameModel);
-
+        console.log(gameModel.title);
         $.ajax({
             method: 'POST',
-            url: 'game/create',
+            url: `${location.protocol}//${location.hostname}:${location.port}/game/create/${gameModel.title}`,
             data: gameModel,
             success: onSuccess,
         })
@@ -118,11 +76,10 @@ $(document).ready(function(){
         function onSuccess(response) {
             console.log(response);
             if(response){
-                window.location.href = '/profile/user/'+response; 
+                /* window.location.href = '/profile/user/'+response;  */
             }
             else{
                 alert('Game already in Currently Playing List!')
-                // window.location.href = '/'
             }
         }
 
@@ -148,7 +105,7 @@ $(document).ready(function(){
 
         $.ajax({
             method: 'POST',
-            url: 'game/wish',
+            url: 'game/wish/'+gameModel.title,
             data: gameModel,
             success: onSuccess,
         })
@@ -156,34 +113,11 @@ $(document).ready(function(){
         function onSuccess(response) {
             console.log(response);
             if(response){
-                window.location.href = 'profile/user/'+response; 
+                /* window.location.href = 'profile/user/'+response;  */
             }
             else{
                 alert('game already in list!')
-                // window.location.href = '/'
             }
         }
     })
-
-    
-    // $('.row').on('click','.addToGamesList', function(e){
-    //     e.preventDefault();
-    //     console.log('add to current list');
-    //     let gameData = $(this).attr('data-id')
-    //     console.log(gameData);
-    //     $.ajax({
-    //         method: 'PUT',
-    //         url: '/game/list',
-    //         data: {
-    //             'pk': gameData,
-    //         },
-    //         success: onSuccess,
-    //     })
-    //     function onSuccess(response) {
-    //         console.log(response);
-            
-
-    // }});
-
-
 });
