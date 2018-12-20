@@ -14,6 +14,7 @@ $.ajax({
 
 function handleS(games){
     $('.games').empty();
+
     results = games.results;
     games.results.forEach(result => {
         releaseDate= result.original_release_date.split(' ')[0]

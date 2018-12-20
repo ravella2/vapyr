@@ -92,7 +92,7 @@ $(document).ready(function(){
     $('.games').on('click','#add-current', function(e){
         e.preventDefault();
         let gameData = this.className.split(" ");
-       
+    
         var gameObj = results.find(result => {
             return result.id==gameData[0]
         })
