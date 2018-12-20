@@ -3,11 +3,16 @@
 
 
 {% block content %}
+
+<div class="container games">
+
+</div>
 <div class="section">
     <div class="container profile">
         <div class="section center"><h2>Currently Playing</h2>
         </div>
         <div class="divider"></div>
+
 {% for game in games  %}
 
 {% if game.prefer %}
@@ -50,9 +55,10 @@
                 <div class="col l3">
                     <ul>
                         <li>Platform: {{game.gameKey.platform}}</li>
+                        <li>gameid = {{game.gameKey.id}}</li>
                         <li>Genre: {{game.gameKey.genre}}</li>
                         <li>Rating: {{game.gameKey.rating}}/5</li>
-                        <a href="#" class="btn light-blue darken-4 btn-primary addToWishList" data-id="{{game.pk}}">Add to Current Games</a>
+                        <a href="#" class="btn light-blue darken-4 btn-primary addToGamesList" data-id="{{game.gameKey.pk}}">Add to Current Games</a>
                         <a href="{% url 'delete_game' pk=game.gameKey.pk %}" class="btn light-blue darken-4 btn-primary editGame" data-id="{{game.pk}}">Delete</a>
                     </ul>
                 </div>

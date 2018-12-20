@@ -61,6 +61,7 @@ $(document).ready(function(){
         function onSuccess(games) {
             $('.games').empty();
             results = games.results;
+            
             games.results.forEach(result => {
                 releaseDate= result.original_release_date.split(' ')[0]
                 let card1 = `
@@ -81,6 +82,7 @@ $(document).ready(function(){
                 </div>
                 <div class="divider"></div>`
                 $('.games').append(card1)
+                
             })
 
         }
@@ -90,7 +92,7 @@ $(document).ready(function(){
     $('.games').on('click','#add-current', function(e){
         e.preventDefault();
         let gameData = this.className.split(" ");
-        
+       
         var gameObj = results.find(result => {
             return result.id==gameData[0]
         })
@@ -163,6 +165,31 @@ $(document).ready(function(){
         }
     })
 
+    $('.row').on('click','.addToGamesList', function(e){
+        e.preventDefault();
+        console.log('add to current list');
+        let gameData = $(this).attr('data-id')
+        console.log(gameData);
+
+        $.ajax({
+            method: 'POST',
+            url: 'game/list',
+            data: gameData,
+            success: onSuccess,
+        })
+
+        function onSuccess(response) {
+            console.log(response);
+            if(response){
+                window.location.href = '/profile/user/'+response; 
+            }
+            else{
+                alert('Game already in Currently Playing List!')
+                // window.location.href = '/'
+            }
+        }
+
+    });
 
 
 });

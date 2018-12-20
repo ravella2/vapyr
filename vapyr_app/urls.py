@@ -10,6 +10,7 @@ urlpatterns = [
     path('special',views.special, name='special'),
     path('game/create', views.game_create, name='game_create'),
     path('game/wish', views.game_wish, name='game_wish'),
+    path('game/list', views.game_list_toggle, name="game_list_toggle"),
     path('register',views.register, name='register'),
     path('profile/<username>', views.new_profile, name="new_profile"),
     path('game/<int:pk>/edit', views.edit_game, name='edit_game'),

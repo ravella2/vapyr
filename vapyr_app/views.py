@@ -20,8 +20,11 @@ def index(request):
 def game_create(request):
     if request.method == 'POST':
         form = GameForm(request.POST)
+        print('test')
+        print(form)
         if form.is_valid():
-            game = form.save()
+            game = form.save() #error happens here
+            print(game)
             join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=True, wishlist=False)
             games = JoinTable.objects.filter(userKey=request.user.profile)    
             return HttpResponse(request.user.username)
@@ -29,7 +32,9 @@ def game_create(request):
 
 @csrf_exempt
 def game_wish(request):
+    print(request)
     if request.method == 'POST':
+        
         form = GameForm(request.POST)
         if form.is_valid():
             game = form.save()
@@ -38,6 +43,14 @@ def game_wish(request):
             return HttpResponse(request.user.username)
     return HttpResponse('')
 
+@csrf_exempt
+def game_list_toggle(request):
+    print(request)
+    # if request.method == 'POST':
+    #         JoinTable.wishlist = not JoinTable.wishlist
+    #         JoinTable.prefer = not JoinTable.prefer
+    #         return HttpResponse(request.user.username)
+    # return HttpResponse('')
 
 @csrf_exempt
 def edit_game(request, pk):
