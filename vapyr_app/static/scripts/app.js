@@ -20,9 +20,9 @@ $(document).ready(function(){
         function onSuccess(games) {
             $('.games').empty();
             results = games.results;
-            
             games.results.forEach(result => {
-                releaseDate= result.original_release_date.split(' ')[0]
+                if (result.original_release_date){
+                releaseDate= result.original_release_date.split(' ')[0]}
                 let card1 = `
                 <div class= "row gamerow valign-wrapper ">
                     <div class="col l3 ">
@@ -51,7 +51,6 @@ $(document).ready(function(){
     $('.games').on('click','#add-current', function(e){
         e.preventDefault();
         let gameData = this.className.split(" ");
-
         var gameObj = results.find(result => {
             return result.id==gameData[0]
         })
@@ -66,10 +65,10 @@ $(document).ready(function(){
         }
 
         console.log(gameModel);
-
+        console.log(gameModel.title);
         $.ajax({
             method: 'POST',
-            url: 'game/create/'+gameModel.title,
+            url: `${location.protocol}//${location.hostname}:${location.port}/game/create/${gameModel.title}`,
             data: gameModel,
             success: onSuccess,
         })
@@ -77,7 +76,7 @@ $(document).ready(function(){
         function onSuccess(response) {
             console.log(response);
             if(response){
-                window.location.href = '/profile/user/'+response; 
+                /* window.location.href = '/profile/user/'+response;  */
             }
             else{
                 alert('Game already in Currently Playing List!')
@@ -114,7 +113,7 @@ $(document).ready(function(){
         function onSuccess(response) {
             console.log(response);
             if(response){
-                window.location.href = 'profile/user/'+response; 
+                /* window.location.href = 'profile/user/'+response;  */
             }
             else{
                 alert('game already in list!')

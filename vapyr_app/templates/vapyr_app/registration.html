@@ -9,6 +9,7 @@
         <form enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         {{ user_form.as_p }}
+        {{ profile_form.as_p }}
         <input href="{% url 'register' %}" type="submit" name="" value="Register">
         </form>
         

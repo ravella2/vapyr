@@ -25,7 +25,7 @@
         <nav class=" light-blue darken-4">
             <div class="nav-wrapper">
                 <a href="/" class="brand-logo center hide-on-small-only">Vapyr</a>
-                    <form class="search" action="" method="post">
+                    <form class="search" action="main.html" method="post">
                         <div class="input-field">
                             <input id="search" type="search" name="search">
                             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
@@ -34,9 +34,10 @@
                     </form>
                 <ul class="right">
                     <li><a href="/">Browse</a></li>
-                    <li><a href="/profile/user/{{user}}">Profile</a></li>
+                    
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'user_logout' %}">Logout</a></li>
+                    <li><a href="/profile/user/{{user}}">{{user}} - Profile</a></li>
                     {% else %}
                     <li><a class="navbar-link" href="{% url 'user_login' %}">Login</a></li>
                     <li><a class="navbar-link" href="{% url 'register' %}">Register</a></li>
