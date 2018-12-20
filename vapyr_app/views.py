@@ -52,6 +52,11 @@ def edit_game(request, pk):
     return render(request, 'vapyr_app/editform.html', {'form': form})
 
 
+@csrf_exempt
+def delete_game(request, pk):
+    Game.objects.get(id=pk).delete()
+    return redirect('show', username=request.user.username)
+
 def show(request, username):
     user = User.objects.get(username=username)
     profile = UserProfile.objects.get(user_id=user)

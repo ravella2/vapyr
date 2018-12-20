@@ -13,5 +13,6 @@ urlpatterns = [
     path('register',views.register, name='register'),
     path('move_game',views.move_game, name='move_game'),
     path('game/<int:pk>/edit', views.edit_game, name='edit_game'),
+    path('game/<int:pk>/delete', views.delete_game, name='delete_game'),
 ]
 
