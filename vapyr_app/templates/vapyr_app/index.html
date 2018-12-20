@@ -35,7 +35,6 @@
                 <ul class="right">
                     <li><a href="/">Browse</a></li>
                     <li><a href="/profile/user/{{user}}">Profile</a></li>
-                    <!-- <li><a href="/user/{{user}}">Profile</a></li> --> 
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'user_logout' %}">Logout</a></li>
                     {% else %}
@@ -72,7 +71,7 @@
     </div>
     <div class="footer-copyright">
         <div class="container">
-        © 2018 Rachele Alvares and Langdon Froker
+        © 2018 Rachele Avella and Langdon Froker
         
         <a class="grey-text text-lighten-4 right" href="#!">Something Else</a>
         </div>
