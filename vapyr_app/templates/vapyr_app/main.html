@@ -8,8 +8,9 @@
         <div class="col s12 m5 l12 grey">
             <h3 class="white-text center">Welcome to <span class="logo-font">Vapyr!</span></h3>
             {% if user.is_authenticated %}
-                    
+                <script type="text/javascript" src="{% static '/scripts/loggedIn.js'%}" defer></script>
                     {% else %}
+                        <script type="text/javascript" src="{% static '/scripts/loggedOut.js'%}" defer></script>
                     <h5 class="white-text center"> Sign in to start making your games list!</h5>       
                 {% endif %}
                       
