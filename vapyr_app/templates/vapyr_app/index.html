@@ -35,10 +35,6 @@
                 <ul class="right">
                     <li><a href="/">Browse</a></li>
                     <li><a href="/profile/user/{{user}}">Profile</a></li>
-<<<<<<< HEAD
-                    <!-- <li><a href="/user/{{user}}">Profile</a></li> --> 
-=======
->>>>>>> 3fa695c968a4c14a96766c760681bd6ee9f20d94
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'user_logout' %}">Logout</a></li>
                     {% else %}

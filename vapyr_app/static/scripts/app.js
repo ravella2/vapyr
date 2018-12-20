@@ -92,7 +92,7 @@ $(document).ready(function(){
     $('.games').on('click','#add-current', function(e){
         e.preventDefault();
         let gameData = this.className.split(" ");
-       
+
         var gameObj = results.find(result => {
             return result.id==gameData[0]
         })
@@ -110,7 +110,7 @@ $(document).ready(function(){
 
         $.ajax({
             method: 'POST',
-            url: 'game/create',
+            url: 'game/create/'+gameModel.title,
             data: gameModel,
             success: onSuccess,
         })
@@ -122,7 +122,6 @@ $(document).ready(function(){
             }
             else{
                 alert('Game already in Currently Playing List!')
-                // window.location.href = '/'
             }
         }
 
@@ -148,7 +147,7 @@ $(document).ready(function(){
 
         $.ajax({
             method: 'POST',
-            url: 'game/wish',
+            url: 'game/wish/'+gameModel.title,
             data: gameModel,
             success: onSuccess,
         })
@@ -160,7 +159,6 @@ $(document).ready(function(){
             }
             else{
                 alert('game already in list!')
-                // window.location.href = '/'
             }
         }
     })
@@ -185,7 +183,6 @@ $(document).ready(function(){
             }
             else{
                 alert('Game already in Currently Playing List!')
-                // window.location.href = '/'
             }
         }
 

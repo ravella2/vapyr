@@ -17,29 +17,31 @@ def index(request):
 
 
 @csrf_exempt
-def game_create(request):
+def game_create(request, title):
     if request.method == 'POST':
         form = GameForm(request.POST)
-        print('test')
-        print(form)
         if form.is_valid():
-            game = form.save() #error happens here
-            print(game)
+            game = form.save() 
             join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=True, wishlist=False)
-            games = JoinTable.objects.filter(userKey=request.user.profile)    
+            return HttpResponse(request.user.username)
+        else:
+            game = Game.objects.get(title=title)
+            join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=True, wishlist=False)   
             return HttpResponse(request.user.username)
     return HttpResponse('')
 
 @csrf_exempt
-def game_wish(request):
-    print(request)
+def game_wish(request, title):
     if request.method == 'POST':
-        
         form = GameForm(request.POST)
         if form.is_valid():
             game = form.save()
             join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=False, wishlist=True)
-            games = JoinTable.objects.filter(userKey=request.user.profile)
+            # games = JoinTable.objects.filter(userKey=request.user.profile)
+            return HttpResponse(request.user.username)
+        else:
+            game = Game.objects.get(title=title)
+            join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=True, wishlist=False)   
             return HttpResponse(request.user.username)
     return HttpResponse('')
 
@@ -56,7 +58,6 @@ def game_list_toggle(request):
 def edit_game(request, pk):
     game = Game.objects.get(pk=pk)
     if request.method == "POST":
-        print('HEPL ME PLZ')
         form = GameForm(request.POST, instance=game)
         if form.is_valid():
             game = form.save()
