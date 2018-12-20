@@ -32,7 +32,7 @@
                     <li>Rating: {{game.gameKey.rating}}/5</li>
                     <a href="{% url 'edit_game' pk=game.gameKey.pk %}" class="btn light-blue darken-4 btn-primary editGame" data-id="{{game.pk}}">Edit</a>
                     <a href="{% url 'delete_game' pk=game.gameKey.pk %}" class="btn light-blue darken-4 btn-primary editGame" data-id="{{game.pk}}">Delete</a>
-                    <a href="" class="btn light-blue darken-4 btn-primary addToWishList" data-id="{{game.pk}}">Add to Wishlist</a>
+                    <a href="{% url 'game_list_toggle' pk=game.pk %}" class="btn light-blue darken-4 btn-primary addToWishList" data-id="{{game.pk}}">Add to Wishlist</a>
                 </ul>
             </div>
         </div>
@@ -55,10 +55,10 @@
                 <div class="col l3">
                     <ul>
                         <li>Platform: {{game.gameKey.platform}}</li>
-                        <li>gameid = {{game.gameKey.id}}</li>
+                        <li>gameid = {{game.id}}</li>
                         <li>Genre: {{game.gameKey.genre}}</li>
                         <li>Rating: {{game.gameKey.rating}}/5</li>
-                        <a href="#" class="btn light-blue darken-4 btn-primary addToGamesList" data-id="{{game.gameKey.pk}}">Add to Current Games</a>
+                        <a href="{% url 'game_list_toggle' pk=game.pk %}" class="btn light-blue darken-4 btn-primary addToGamesList" data-id="{{game.pk}}">Add to Current Games</a>
                         <a href="{% url 'delete_game' pk=game.gameKey.pk %}" class="btn light-blue darken-4 btn-primary editGame" data-id="{{game.pk}}">Delete</a>
                     </ul>
                 </div>

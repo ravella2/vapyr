@@ -165,31 +165,25 @@ $(document).ready(function(){
         }
     })
 
-    $('.row').on('click','.addToGamesList', function(e){
-        e.preventDefault();
-        console.log('add to current list');
-        let gameData = $(this).attr('data-id')
-        console.log(gameData);
+    
+    // $('.row').on('click','.addToGamesList', function(e){
+    //     e.preventDefault();
+    //     console.log('add to current list');
+    //     let gameData = $(this).attr('data-id')
+    //     console.log(gameData);
+    //     $.ajax({
+    //         method: 'PUT',
+    //         url: '/game/list',
+    //         data: {
+    //             'pk': gameData,
+    //         },
+    //         success: onSuccess,
+    //     })
+    //     function onSuccess(response) {
+    //         console.log(response);
+            
 
-        $.ajax({
-            method: 'POST',
-            url: 'game/list',
-            data: gameData,
-            success: onSuccess,
-        })
-
-        function onSuccess(response) {
-            console.log(response);
-            if(response){
-                window.location.href = '/profile/user/'+response; 
-            }
-            else{
-                alert('Game already in Currently Playing List!')
-                // window.location.href = '/'
-            }
-        }
-
-    });
+    // }});
 
 
 });
