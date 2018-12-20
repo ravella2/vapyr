@@ -46,13 +46,13 @@ def game_wish(request, title):
     return HttpResponse('')
 
 @csrf_exempt
-def game_list_toggle(request):
-    print(request)
-    # if request.method == 'POST':
-    #         JoinTable.wishlist = not JoinTable.wishlist
-    #         JoinTable.prefer = not JoinTable.prefer
-    #         return HttpResponse(request.user.username)
-    # return HttpResponse('')
+def game_list_toggle(request, pk):
+    game = JoinTable.objects.get(pk=pk)
+    game.prefer = not game.prefer
+    game.wishlist = not game.wishlist
+    game.save()
+    user = request.user.username
+    return redirect('show', username = user)
 
 @csrf_exempt
 def edit_game(request, pk):
