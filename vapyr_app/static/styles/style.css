@@ -1,29 +1,32 @@
-<<<<<<< HEAD
+
 nav{
     padding: 0 10px 0 10px;
 
-=======
+}
 *{
     font-family: 'Pontano Sans', sans-serif;
 }
 nav{
     padding: 0 10px 0 10px;
     
->>>>>>> master
+
 }
+*{
+    font-family: 'Pontano Sans', sans-serif;
+}
+
 
 nav .right{
     position: absolute;
     top: 0px;
     right: 0px;
 }
-<<<<<<< HEAD
+
 .page-footer, nav{
     background-color: lightslategray
 }
-=======
 
->>>>>>> master
+
 
 body{
     background-image: url('/static/images/vapor-background-11.jpg');
@@ -63,26 +66,30 @@ nav .right img{
     cursor: pointer;
 }
 
-<<<<<<< HEAD
+
 nav .right .imgProfil a{
     height: 64px;
 }
 
-=======
->>>>>>> master
+
 .hidden{
     display: none;
 }
 
 
 main {
-<<<<<<< HEAD
+
     flex: 1 0 auto;
 }
 
 .row.responsive_img{
     max-height: 200px !important;
-=======
+    flex: 1 0 auto;
+}
+
+.row.responsive_img{
+
+
 flex: 1 0 auto;
 }
 
@@ -104,5 +111,17 @@ flex: 1 0 auto;
 
 span.logo-font{
     font-family: 'Courgette', cursive;
->>>>>>> master
+
+}
+
+.game-form{
+    width: 50vw;
+    background-color: whitesmoke;
+    padding: .3em;
+
+}
+
+select{
+    display: initial !important;
+
 }

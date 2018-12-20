@@ -14,9 +14,6 @@ class UserProfileForm(forms.ModelForm):
     class Meta():
         model = UserProfile
         fields = ('user_id','gamer_style','pref_platform','profile_pic')
-        # exclude = ('user_id',)
-
-        
 
 class GameForm(forms.ModelForm):
 

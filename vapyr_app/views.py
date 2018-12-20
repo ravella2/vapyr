@@ -39,6 +39,24 @@ def game_wish(request):
     return HttpResponse('')
 
 
+@csrf_exempt
+def edit_game(request, pk):
+    game = Game.objects.get(pk=pk)
+    if request.method == "POST":
+        print('HEPL ME PLZ')
+        form = GameForm(request.POST, instance=game)
+        if form.is_valid():
+            game = form.save()
+            return redirect('show', username=request.user.username)
+    else:
+        form = GameForm(instance=game)
+    return render(request, 'vapyr_app/editform.html', {'form': form})
+
+
+@csrf_exempt
+def delete_game(request, pk):
+    Game.objects.get(id=pk).delete()
+    return redirect('show', username=request.user.username)
 
 def show(request, username):
     user = User.objects.get(username=username)
@@ -69,6 +87,7 @@ def register(request):
     else:
         user_form = UserForm()
         return render(request, 'vapyr_app/registration.html', {'user_form':user_form})
+    return render(request, 'vapyr_app/registration.html', {'user_form':user_form})
 
 def new_profile(request, username):
     if request.method == 'POST':
@@ -91,7 +110,7 @@ def new_profile(request, username):
             return render(request, 'vapyr_app/new_profile.html', {'profile_form':profile_form, 'registered': False})
 
 def user_login(request):
-    print(request)
+    
     if request.method == 'POST':
         print('test')
         username = request.POST.get('username')
@@ -100,7 +119,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return redirect('profile/user/lfroker/')
+                return redirect('profile/user/'+username) 
             else:
                 return HttpResponse("Your account was inactive.")
         else:
@@ -109,11 +128,3 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'vapyr_app/login.html', {})
-
-def move_game(request):
-    
-    game_id = request.GET['game_id']
-    print(game_id)
-    return HttpResponse(request, 'vapyr_app/profile.html')
-
-

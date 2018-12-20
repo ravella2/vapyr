@@ -36,3 +36,5 @@ class JoinTable(models.Model):
     
     def __str__(self):
         return self.userKey.user_id.username + " " + self.gameKey.title
+
+

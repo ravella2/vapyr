@@ -25,6 +25,9 @@
                     <li>Platform: {{game.gameKey.platform}}</li>
                     <li>Genre: {{game.gameKey.genre}}</li>
                     <li>Rating: {{game.gameKey.rating}}/5</li>
+                    <a href="{% url 'edit_game' pk=game.gameKey.pk %}" class="btn light-blue darken-4 btn-primary editGame" data-id="{{game.pk}}">Edit</a>
+                    <a href="{% url 'delete_game' pk=game.gameKey.pk %}" class="btn light-blue darken-4 btn-primary editGame" data-id="{{game.pk}}">Delete</a>
+                    <a href="" class="btn light-blue darken-4 btn-primary addToWishList" data-id="{{game.pk}}">Add to Wishlist</a>
                 </ul>
             </div>
         </div>
@@ -50,6 +53,10 @@
                         <li>Genre: {{game.gameKey.genre}}</li>
                         <li>Rating: {{game.gameKey.rating}}/5</li>
                         <a href="#" class="btn light-blue darken-4 btn-primary addToWishList" data-id="{{game.pk}}">Add to Current Games</a>
+<<<<<<< HEAD
+=======
+                        <a href="{% url 'delete_game' pk=game.gameKey.pk %}" class="btn light-blue darken-4 btn-primary editGame" data-id="{{game.pk}}">Delete</a>
+>>>>>>> master
                     </ul>
                 </div>
             </div>
