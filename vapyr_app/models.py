@@ -5,7 +5,14 @@ from django.contrib.auth.models import User
 class UserProfile(models.Model):
     user_id = models.OneToOneField(User,on_delete=models.CASCADE, related_name="profile")
     profile_pic = models.ImageField(upload_to='profile_pics',blank=True)
-    pref_platform = models.CharField(max_length=100)
+    PLATFORMS = (
+        ('PS4', 'PS4'),
+        ('SWITCH', 'Nintendo Switch'),
+        ('XBOXONE', 'Xbox One'),
+        ('PC', 'PC'),
+    )
+    pref_platform = models.CharField(max_length=100, choices=PLATFORMS, default='PS4')
+    pref_plat_id = models.CharField(max_length=100, default=146)
     GAMER_STYLES = (
         ('CASUAL', 'Casual'),
         ('HARDCORE', 'Hardcore'),

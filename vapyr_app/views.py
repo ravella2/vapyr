@@ -108,12 +108,20 @@ def new_profile(request, username):
         profile_form = UserProfileForm(data=request.POST)
         if profile_form.is_valid():
             profile_form['user_id'].initial = request.user
-            profile = profile_form.save()
+            profile = profile_form.save(commit=False)
+            ids = [{"console": "Switch", "gid": 157}, {"console": "PS4", "gid": 146}, {"console": "PC", "gid": 94}, {"console": "XboxOne", "gid": 145}]
+            setID = 'no pref'
+            for di in ids :
+                print(di)
+                for key in di :
+                    print(di[key])
+                    if di[key] == profile.pref_platform :
+                        setID = di['gid']
+                        print('HERE IS THE ID')
+                        print(setID)
+                        profile.pref_plat_id = setID
+            profile.save()
             return redirect('user/'+username)
-        
-            # if 'profile_pic' in request.FILES:
-            #     profile.profile_pic = request.FILES['profile_pic']
-            # profile.save()
         else:
             print(profile_form.errors)
     else:
