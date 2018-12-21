@@ -7,6 +7,7 @@ $(document).ready(function(){
         coverTrigger: false,
         constrainWidth: false
     });
+    
     //Search Functionality//
     $('.search').on('submit', function(e){
         e.preventDefault();
@@ -30,15 +31,15 @@ $(document).ready(function(){
                 if (result.original_release_date){
                 releaseDate= result.original_release_date.split(' ')[0]}
                 let card1 = `
-                <div class= "row gamerow valign-wrapper ">
-                    <div class="col l3 ">
+                <div class= "row gamerow">
+                    <div class="col s12 m3 l3 center">
                         <a target="_blank" href="${result.site_detail_url}"><img class="responsive-img" src="${result.image.medium_url}"></a>
                     </div>
-                    <div class="col l6">
+                    <div class="col s8 m3 l3">
                         <h5>${result.name}</h5><h6>Released: ${releaseDate}</h6>
                         <p>${result.deck}</p>
                     </div>
-                    <div class="col l3 valign-wrapper">
+                    <div class="col s4 m3 l3 valign-wrapper">
                         <ul>
                             <li><a class="${result.id} waves-effect waves-light center-align light-blue darken-4 btn" id='add-current'>Add to Games List</a></li>
                             <li><a class="${result.id} waves-effect waves-light center-align light-blue darken-4 btn" id='add-wish'>Add to Wishlist</a></li>
@@ -56,6 +57,7 @@ $(document).ready(function(){
     //Add game to user's currently playing list//
     $('.games').on('click','#add-current', function(e){
         e.preventDefault();
+        M.toast({html: 'Game Added to Games List!'})
         let gameData = this.className.split(" ");
         var gameObj = results.find(result => {
             return result.id==gameData[0]
@@ -81,7 +83,7 @@ $(document).ready(function(){
         function onSuccess(response) {
             console.log(gameModel.title + ' added to current games');
             if(response){
-                /* window.location.href = '/profile/user/'+response;  */
+                
             }
             else{
                 alert('Game already in Currently Playing List!')
@@ -93,6 +95,7 @@ $(document).ready(function(){
     //Add game to user's wishlist//
     $('.games').on('click', '#add-wish', function(e) {
         e.preventDefault();
+        M.toast({html: 'Game Added to Wishlist!'})
         let gameData = this.className.split(" ");
         
         var gameObj = results.find(result => {

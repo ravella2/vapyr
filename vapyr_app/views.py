@@ -27,7 +27,6 @@ def game_create(request, title):
         if form.is_valid():
             game = form.save() 
             join_table = JoinTable.objects.get_or_create(userKey=request.user.profile, gameKey=game, prefer=True, wishlist=False)
-            
             return HttpResponse(request.user.username)
         else:
             game = Game.objects.get(title=title)
@@ -106,13 +105,9 @@ def register(request):
             ids = [{"console": "Switch", "gid": 157}, {"console": "PS4", "gid": 146}, {"console": "PC", "gid": 94}, {"console": "XboxOne", "gid": 145}]
             setID = 'no pref'
             for di in ids :
-                print(di)
                 for key in di :
-                    print(di[key])
                     if di[key] == profile.pref_platform :
                         setID = di['gid']
-                        print('HERE IS THE ID')
-                        print(setID)
                         profile.pref_plat_id = setID
             profile.save()
             if 'profile_pic' in request.FILES:

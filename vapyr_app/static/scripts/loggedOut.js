@@ -17,17 +17,18 @@ function handleS(games){
     $('.games').empty();
     results = games.results;
     games.results.forEach(result => {
-        releaseDate= result.original_release_date.split(' ')[0]
+        if (result.original_release_date){
+            releaseDate = result.original_release_date.split(' ')[0]}
         let card1 = `
-        <div class= "row gamerow valign-wrapper ">
-            <div class="col l3 ">
+        <div class= "row gamerow">
+            <div class="col s12 m3 l3 center">
                 <a target="_blank" href="${result.site_detail_url}"><img class="responsive-img" src="${result.image.medium_url}"></a>
             </div>
-            <div class="col l6">
+            <div class="col s8 m3 l6">
                 <h5>${result.name}</h5><h6>Released: ${releaseDate}</h6>
                 <p>${result.deck}</p>
             </div>
-            <div class="col l3 valign-wrapper">
+            <div class="col s4 m3 l3 valign-wrapper">
                 <ul>
                     <li><a class="${result.id} waves-effect waves-light center-align light-blue darken-4 btn" id='add-current'>Add to Games List</a></li>
                     <li><a class="${result.id} waves-effect waves-light center-align light-blue darken-4 btn" id='add-wish'>Add to Wishlist</a></li>

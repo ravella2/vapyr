@@ -17,11 +17,11 @@
 
 {% if game.prefer %}
 
-<div class="row gamerow">
+    <div class="row gamerow ">
         <div class="col s12 m3 l3 center">
                 <img class="responsive-img" src="{{game.gameKey.image}}">
             </div>
-            <div class="col s8 m6 l5 ">
+            <div class="col s8 m3 l6">
                 <h5>{{game.gameKey.title}}</h5>
                 <p>{{game.gameKey.description}}</p>
             </div>
@@ -32,7 +32,7 @@
                     <li>Rating: {{game.gameKey.rating}}/5</li>
                     <a href="{% url 'edit_game' pk=game.gameKey.pk %}" class="btn light-blue darken-4 btn-primary editGame" data-id="{{game.pk}}">Edit</a>
                     <a href="{% url 'delete_game' pk=game.gameKey.pk %}" class="btn light-blue darken-4 btn-primary editGame" data-id="{{game.pk}}">Delete</a>
-                    <a href="{% url 'game_list_toggle' pk=game.pk %}" class="btn light-blue darken-4 btn-primary addToWishList" data-id="{{game.pk}}">Add to Wishlist</a>
+                    <a href="{% url 'game_list_toggle' pk=game.pk %}" class="btn light-blue darken-4 btn-primary addToWishList" onclick="M.toast({html: 'Added to Wishlist'})" data-id="{{game.pk}}">Add to Wishlist</a>
                 </ul>
             </div>
         </div>
@@ -44,7 +44,7 @@
     <div class="divider"></div>
     {% for game in games  %}
     {% if game.wishlist %}
-    <div class="row valign-wrapper">
+    <div class="row gamerow ">
                 <div class="col s12 m3 l3 center">
                     <img class="responsive-img" src="{{game.gameKey.image}}">
                 </div>
@@ -52,12 +52,12 @@
                     <h5>{{game.gameKey.title}}</h5>
                     <p>{{game.gameKey.description}}</p>
                 </div>
-                <div class="col s4 m3 l3">
+                <div class="col s4 m3 l3 valign-wrapper">
                     <ul>
                         <li>Platform: {{game.gameKey.platform}}</li>
                         <li>Genre: {{game.gameKey.genre}}</li>
                         <li>Rating: {{game.gameKey.rating}}/5</li>
-                        <a href="{% url 'game_list_toggle' pk=game.pk %}" class="btn light-blue darken-4 btn-primary addToGamesList" data-id="{{game.pk}}">Add to Current Games</a>
+                        <a href="{% url 'game_list_toggle' pk=game.pk %}" class="btn light-blue darken-4 btn-primary addToGamesList" onclick="M.toast({html: 'Added to Current Games!'}) " data-id="{{game.pk}}">Add to Current Games</a>
                         <a href="{% url 'delete_game' pk=game.gameKey.pk %}" class="btn light-blue darken-4 btn-primary editGame" data-id="{{game.pk}}">Delete</a>
                     </ul>
                 </div>

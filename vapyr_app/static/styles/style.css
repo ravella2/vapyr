@@ -34,7 +34,7 @@ nav .right img{
     cursor: pointer;
 }
 .nav-wrapper form{
-    margin-left: 55%;
+    margin-left: 45%;
     width: 25%;
 }
 .nav-wrapper .input-field{
@@ -72,6 +72,7 @@ select{
 .btn{
     margin-top: 10px;
 }
+
 .game-form{
     width: 50vw;
     background-color: whitesmoke;
@@ -87,4 +88,21 @@ select{
 /* /////////_FOOTER_///////////// */
 .page-footer, nav{
     background-color: lightslategray
+}
+
+@media (max-width: 1000px){
+    .nav-wrapper form{
+        margin-left: 25%;
+        width: 25%;
+    }
+}
+
+@media (max-width: 600px){
+    .nav-wrapper form{
+        margin-left: 1%;
+        width: 40%;
+    }
+    .nav-wrapper form #search{
+        height: 45px;
+    }
 }
