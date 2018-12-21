@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .models import Game, UserProfile, JoinTable
 from vapyr_app.forms import UserForm, UserProfileForm, GameForm
 from django.contrib.auth.models import User
-import requests
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -13,8 +12,13 @@ from django.template.loader import render_to_string
 # Create your views here.
 
 def index(request):
-    return render(request, 'vapyr_app/main.html' )
-
+    if request.user.is_authenticated:
+        user = request.user
+        profile = UserProfile.objects.get(user_id=user)
+        games = JoinTable.objects.filter(userKey=profile)
+        return render(request, 'vapyr_app/main.html', {'user':user, 'games':games, 'profile':profile} )
+    else:
+        return render(request, 'vapyr_app/main.html')
 
 @csrf_exempt
 def game_create(request, title):
@@ -97,7 +101,6 @@ def register(request):
             user = user_form.save()
             user.set_password(user.password)
             user.save()
-
             profile = profile_form.save(commit=False)
             profile.user_id = user
             ids = [{"console": "Switch", "gid": 157}, {"console": "PS4", "gid": 146}, {"console": "PC", "gid": 94}, {"console": "XboxOne", "gid": 145}]
@@ -111,6 +114,9 @@ def register(request):
                         print('HERE IS THE ID')
                         print(setID)
                         profile.pref_plat_id = setID
+            profile.save()
+            if 'profile_pic' in request.FILES:
+                profile.profile_pic = request.FILES['profile_pic']
             profile.save()
 
             return redirect('user_login')

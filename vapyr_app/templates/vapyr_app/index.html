@@ -1,3 +1,4 @@
+
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -6,8 +7,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <!--Import materialize.css-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="icon" href="{% static '/images/favi.png' %}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Courgette|Pontano+Sans" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="{% static '/styles/materialize.min.css' %}"  media="screen,projection"/>
@@ -16,68 +17,122 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous">
         </script>
         <script type="text/javascript" src="{% static '/scripts/materialize.min.js' %}"></script>
-        <!-- <script type="text/javascript" src="{% static '/scripts/app.js'%}"></script> -->
         <script type="text/javascript" src="{% static '/scripts/app.js'%}" defer></script>
-</head>
+    </head>
 
-<body>
-    <div class="navbar-fixed ">
-        <nav class=" light-blue darken-4">
-            <div class="nav-wrapper">
-                <a href="/" class="brand-logo center hide-on-small-only">Vapyr</a>
-                    <form class="search" action="main.html" method="post">
-                        <div class="input-field">
-                            <input id="search" type="search" name="search">
-                            <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
+    <body>
+        <header>
+            <ul id="slide-out" class="sidenav">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="{% static 'images/Games-Banner-1140x400.png' %}">
                         </div>
-                    </form>
-                <ul class="right">
-                    <li><a href="/">Browse</a></li>
-                    
-                    {% if user.is_authenticated %}
-                    <li><a href="{% url 'user_logout' %}">Logout</a></li>
-                    <li><a href="/profile/user/{{user}}">{{user}} - Profile</a></li>
-                    {% else %}
-                    <li><a class="navbar-link" href="{% url 'user_login' %}">Login</a></li>
-                    <li><a class="navbar-link" href="{% url 'register' %}">Register</a></li>
-                {% endif %}
+                        <a href="/profile/user/{{user}}"><img class="circle responsive-img" src="{{profile.profile_pic.url}}"></a>
+                        <a href="/profile/user/{{user}}"><span class="white-text name"><h4>{{user.username}}</h4></span></a>
+                    </div>
+                </li>
+                <table class="centered responsive">
+                    <thead>
+                        <tr>
+                            <th><h6>Prefered Platform</h6></th>
+                            <th><h6>Gamer Style</h6></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{profile.pref_platform}}</td>
+                            <td>{{profile.gamer_style}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <li>
+                    <h5 class="center">Current Games</h5>
+                </li>
+                <div class="divider"></div>
+                    <table class="centered responsive">
+                        <thead>
+                            <tr>
+                                <th>Game</th>
+                                <th>Platform</th>
+                                <th>Rating</th>
+                            </tr>
+                        </thead>
+                    {% for game in games  %}
+                    {% if game.prefer %}
+                        <tbody>
+                            <tr>
+                                <td>{{game.gameKey.title}}</td>
+                                <td>{{game.gameKey.platform}}</td>
+                                <td>{{game.gameKey.rating}}/5</td>
+                            </tr>
+                        </tbody>
+                    {% endif %}
+                    {% endfor %}
+                    </table>
                 </ul>
-            </div>
-        </nav>
-    </div>
-
-<main>
-
-        {% block content%}
-        {% endblock %}
-</main>    
-<footer class="page-footer  light-blue darken-4">
-    <div class="container">
-        <div class="row">
-        <div class="col l6 s12">
-            <h5 class="white-text">Vapyr Inc.</h5>
-            <p class="grey-text text-lighten-4">Not affiliated with Steam.</p>
-        </div>
-        <div class="col l4 offset-l2 s12">
-            <h5 class="white-text">Links</h5>
-            <ul>
-            <li><a class="grey-text text-lighten-3" href="#!">Giant Bomb Game Database</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-            <li><a class="grey-text text-lighten-4" href="#!">Langdon GitHub</a></li>
-            <li><a class="grey-text text-lighten-4" href="#!">Rachele GitHub</a></li>
+            <ul id="dropdown1" class="dropdown-content">
+                <li><a href="/profile/user/{{user}}">Your Games</a></li>
+                <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large ">Profile</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Preferences</a></li>
             </ul>
-        </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container">
-        © 2018 Rachele Avella and Langdon Froker
-        
-        <a class="grey-text text-lighten-4 right" href="#!">Something Else</a>
-        </div>
-    </div>
-</footer>
-</body>
+                
+            <div class="navbar-fixed ">
+                <nav class=" light-blue darken-4">
+                    <div class="nav-wrapper">
+                        <a href="/" class="brand-logo hide-on-small-only">Vapyr</a>
+                        <form class="search" action="main.html" method="post">
+                            <div class="input-field">
+                                <input id="search" type="search" name="search">
+                                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                                <i class="material-icons">close</i>
+                            </div>
+                        </form>
+                        <ul class="right">
+                            <li><a href="/">Browse</a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'user_logout' %}">Logout</a></li>
+                            <!-- Dropdown Trigger -->
+                            <li><a class="dropdown-trigger" href="#" data-target="dropdown1">Profile - {{user.username}}<i id="dropArrow" class="material-icons right">arrow_drop_down</i></a></li>
+                        {% else %}
+                            <li><a class="navbar-link" href="{% url 'user_login' %}">Login</a></li>
+                            <li><a class="navbar-link" href="{% url 'register' %}">Register</a></li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <main>
+            {% block content%}
+            {% endblock %}
+        </main>    
+        <footer class="page-footer  light-blue darken-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 s12">
+                        <h5 class="white-text">Vapyr Inc.</h5>
+                        <p class="grey-text text-lighten-4">Not affiliated with Steam.</p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                        <h5 class="white-text">Links</h5>
+                        <ul>
+                            <li><a class="grey-text text-lighten-3" href="#!">Giant Bomb Game Database</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                            <li><a class="grey-text text-lighten-4" href="#!">Langdon GitHub</a></li>
+                            <li><a class="grey-text text-lighten-4" href="#!">Rachele GitHub</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    © 2018 Rachele Avella and Langdon Froker
+                    <a class="grey-text text-lighten-4 right" href="#!">Something Else</a>
+                </div>
+            </div>
+        </footer>
+    </body>
 </html>
 

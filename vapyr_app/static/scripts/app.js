@@ -1,6 +1,12 @@
 var results = []
 $(document).ready(function(){
-
+    $('.sidenav').sidenav({
+        edge: 'right'
+    });
+    $(".dropdown-trigger").dropdown({
+        coverTrigger: false,
+        constrainWidth: false
+    });
     //Search Functionality//
     $('.search').on('submit', function(e){
         e.preventDefault();
@@ -26,7 +32,7 @@ $(document).ready(function(){
                 let card1 = `
                 <div class= "row gamerow valign-wrapper ">
                     <div class="col l3 ">
-                        <a target="_blank" href="${result.site_detail_url}"><img class="responsive-img" src="${result.image.screen_url}"></a>
+                        <a target="_blank" href="${result.site_detail_url}"><img class="responsive-img" src="${result.image.medium_url}"></a>
                     </div>
                     <div class="col l6">
                         <h5>${result.name}</h5><h6>Released: ${releaseDate}</h6>
@@ -57,15 +63,14 @@ $(document).ready(function(){
 
         let gameModel = {
             "title": gameObj.name,
-            "image": gameObj.image.screen_url,
+            "image": gameObj.image.medium_url,
             "platform": gameObj.platforms[0].name,
             "genre": "Unknown",
             "description": gameObj.deck,
             "rating":0,
         }
 
-        console.log(gameModel);
-        console.log(gameModel.title);
+        
         $.ajax({
             method: 'POST',
             url: `${location.protocol}//${location.hostname}:${location.port}/game/create/${gameModel.title}`,
@@ -74,7 +79,7 @@ $(document).ready(function(){
         })
 
         function onSuccess(response) {
-            console.log(response);
+            console.log(gameModel.title + ' added to current games');
             if(response){
                 /* window.location.href = '/profile/user/'+response;  */
             }
@@ -96,7 +101,7 @@ $(document).ready(function(){
 
         let gameModel = {
             "title": gameObj.name,
-            "image": gameObj.image.screen_url,
+            "image": gameObj.image.medium_url,
             "platform": gameObj.platforms[0].name,
             "genre": "Unknown",
             "description": gameObj.deck,
@@ -105,13 +110,13 @@ $(document).ready(function(){
 
         $.ajax({
             method: 'POST',
-            url: 'game/wish/'+gameModel.title,
+            url: `${location.protocol}//${location.hostname}:${location.port}/game/wish/${gameModel.title}`,
             data: gameModel,
             success: onSuccess,
         })
 
         function onSuccess(response) {
-            console.log(response);
+            console.log(gameModel.title + ' added to wishlist');
             if(response){
                 /* window.location.href = 'profile/user/'+response;  */
             }

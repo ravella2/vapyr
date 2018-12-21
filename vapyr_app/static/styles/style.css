@@ -1,24 +1,7 @@
-
-nav{
-    padding: 0 10px 0 10px;
-
-}
+/* ///////////////_ALL_////////////////////// */
 *{
     font-family: 'Pontano Sans', sans-serif;
 }
-
-
-nav .right{
-    position: absolute;
-    top: 0px;
-    right: 0px;
-}
-
-.page-footer, nav{
-    background-color: lightslategray
-}
-
-
 body{
     background-image: url('/static/images/vapor-background-11.jpg');
     background-repeat: no-repeat;
@@ -28,27 +11,21 @@ body{
     min-height: 100vh;
     flex-direction: column;
 }
-.games, .profile{
-    background-color: whitesmoke;
+.hidden{
+    display: none;
 }
-
-.nav-wrapper form{
-    margin-left: 55%;
-    width: 25%;
+#dropArrow{
+    right: -10px;
 }
-.card{
-    margin: 18px !important;
+/* /////////_NAV_///////////// */
+nav{
+    padding: 0 10px 0 10px;
 }
-
-.nav-wrapper .input-field{
-    padding-top: 7px;
+nav .right{
+    position: absolute;
+    top: 0px;
+    right: 40px;
 }
-
-.nav-wrapper form #search{
-    height: 50px;
-}
-
-
 nav .right img{
     margin: 17px;
     height: 30px;
@@ -56,36 +33,15 @@ nav .right img{
     border: 2px solid white;
     cursor: pointer;
 }
-
-
-nav .right .imgProfil a{
-    height: 64px;
+.nav-wrapper form{
+    margin-left: 55%;
+    width: 25%;
 }
-
-.hidden{
-    display: none;
+.nav-wrapper .input-field{
+    padding-top: 7px;
 }
-
-
-main {
-flex: 1 0 auto;
-}
-
-.row.responsive_img{
-
-flex: 1 0 auto;
-}
-
-.row.responsive_img{
-    margin-top: 20px !important;
-}
-
-.gamerow{
-    margin-bottom: 0px !important;
-}
-
-.btn{
-    margin-top: 10px;
+.nav-wrapper form #search{
+    height: 50px;
 }
 
 .brand-logo{
@@ -95,14 +51,40 @@ flex: 1 0 auto;
 span.logo-font{
     font-family: 'Courgette', cursive;
 }
-
-.game-form{
-    width: 50vw;
-    background-color: whitesmoke;
-    padding: .3em;
-
+/* /////////_MAIN_///////////// */
+main {
+    flex: 1 0 auto;
+}
+h6{
+    font-weight: bold
+}
+.gamerow img{
+    margin-top: 8px;
+}
+.row.responsive_img{
+    flex: 1 0 auto;
+    margin-top: 20px !important;
 }
 /* Fuckin' Materialize */
 select{
     display: initial !important;
+}
+.btn{
+    margin-top: 10px;
+}
+.game-form{
+    width: 50vw;
+    background-color: whitesmoke;
+    padding: .3em;
+}
+.games, .profile{
+    background-color: whitesmoke;
+}
+.gamerow{
+    margin-bottom: 0px !important;
+}
+
+/* /////////_FOOTER_///////////// */
+.page-footer, nav{
+    background-color: lightslategray
 }
