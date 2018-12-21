@@ -105,7 +105,7 @@ $(document).ready(function(){
 
         $.ajax({
             method: 'POST',
-            url: 'game/wish/'+gameModel.title,
+            url: `${location.protocol}//${location.hostname}:${location.port}/game/wish/${gameModel.title}`,
             data: gameModel,
             success: onSuccess,
         })

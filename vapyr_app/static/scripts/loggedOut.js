@@ -16,7 +16,8 @@ function handleS(games){
     $('.games').empty();
     results = games.results;
     games.results.forEach(result => {
-        releaseDate= result.original_release_date.split(' ')[0]
+        if (result.original_release_date){
+            releaseDate = result.original_release_date.split(' ')[0]}
         let card1 = `
         <div class= "row gamerow valign-wrapper ">
             <div class="col l3 ">

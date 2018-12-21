@@ -12,16 +12,13 @@
                     {% else %}
                         <script type="text/javascript" src="{% static '/scripts/loggedOut.js'%}" defer></script>
                     <h5 class="white-text center"> Sign in to start making your games list!</h5>       
-                {% endif %}
-                      
+                {% endif %}                 
         </div>
     </div>
 </div>
 </header>
 <div class="section">
-    <div class="container games">
-
-    
+    <div class="container games" data-id={{request.user.profile.pref_plat_id}}>
     </div>
 </div>
 {% endblock %}
