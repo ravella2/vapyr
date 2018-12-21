@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR,'vapyr_app/templates')
 STATIC_DIR = os.path.join(BASE_DIR,'vapyr_app/static')
 MEDIA_DIR = os.path.join(BASE_DIR,'vapyr_app/media')
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = ' bobs'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -137,7 +137,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 django_heroku.settings(locals())
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-   
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static')),

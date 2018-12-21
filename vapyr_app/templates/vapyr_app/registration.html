@@ -5,8 +5,8 @@
 <div class="col s12 l6 offset-l3">
         <div class="card grey lighten-3">
           <div class="card-content">
-            <h4 class="card-title center-align">Login</h4>
-            <form method="post"  class="center-align"action="{% url 'user_login' %}">
+            <h4 class="card-title center-align">Register</h4>
+            <form method="post"  enctype="multipart/form-data" class="center-align"action="{% url 'register' %}">
                   {% csrf_token %}
                   {{ user_form.as_p }}
                   {{ profile_form.as_p }}
@@ -18,19 +18,3 @@
     </div>
 {% endblock %} 
 
-
-      <!-- <div class="container">
-    <div class="row white">
-   
-    
-    <h3>Register Here</h3>
-        <form enctype="multipart/form-data" method="POST">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-        <input href="{% url 'register' %}" type="submit" name="" value="Register">
-        </form>
-        
-
-    </div>
-</div> -->

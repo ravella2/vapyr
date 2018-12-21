@@ -97,6 +97,7 @@ def register(request):
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileForm(data=request.POST)
         if user_form.is_valid() and profile_form.is_valid():
+            print('FORMS ARE VALID')
             user = user_form.save()
             user.set_password(user.password)
             user.save()
@@ -109,7 +110,7 @@ def register(request):
                     if di[key] == profile.pref_platform :
                         setID = di['gid']
                         profile.pref_plat_id = setID
-            profile.save()
+            
             if 'profile_pic' in request.FILES:
                 profile.profile_pic = request.FILES['profile_pic']
             profile.save()
@@ -117,6 +118,7 @@ def register(request):
             return redirect('user_login')
         else:
             print(user_form.errors)
+            print('INVALID FORMS')
             return render(request, 'vapyr_app/registration.html', {'user_form':user_form, 'profile_form':profile_form}, {'error':'invalid'})
     else:
         user_form = UserForm()
