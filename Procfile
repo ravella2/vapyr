@@ -1,1 +1,1 @@
-web: gunicorn vapyr.wsgi --log-file -
+web: gunicorn vapyr.wsgi --log-file-
