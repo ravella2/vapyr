@@ -11,21 +11,24 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import django_heroku
+
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR,'vapyr_app/templates')
 STATIC_DIR = os.path.join(BASE_DIR,'vapyr_app/static')
 MEDIA_DIR = os.path.join(BASE_DIR,'vapyr_app/media')
-
+SECRET_KEY = os.environ['SECRET_KEY']
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4shy_uv72#v2d%y^_@@#mu0d_wz(5br*j525elm@x7j=2y(r$-'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -50,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     
 ]
 
@@ -129,3 +133,12 @@ LOGIN_URL = '/vapyr_app/user_login/'
 LOGOUT_URL = '/vapyr_app/user_logout/'
 CORS_ORIGIN_ALLOW_ALL = True
 
+
+django_heroku.settings(locals())
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+   
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static')),
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
