@@ -29,9 +29,9 @@
                             <img src="{% static 'images/Games-Banner-1140x400.png' %}">
                         </div>
                         {% if profile.profile_pic %}
-                        <a href="/profile/user/{{user}}"><img class="circle responsive-img" src="{{profile.profile_pic.url}}"></a>
+                            <a href="/profile/user/{{user}}"><img class="circle responsive-img" src="{{profile.profile_pic.url}}"></a>
                         {%else%}
-                        <a href="/profile/user/{{user}}"><img class="circle responsive-img" src="{% static '/images/blank.png'%}"></a>
+                            <a href="/profile/user/{{user}}"><img class="circle responsive-img" src="{% static '/images/blank.png'%}"></a>
                         {%endif%}
                         <a href="/profile/user/{{user}}"><span class="white-text name"><h4>{{user.username}}</h4></span></a>
                     </div>

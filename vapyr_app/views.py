@@ -110,8 +110,8 @@ def register(request):
                         setID = di['gid']
                         profile.pref_plat_id = setID
             profile.save()
-            if 'profile_pic' in request.FILES:
-                profile.profile_pic = request.FILES['profile_pic']
+            if 'profile_pics' in request.FILES:
+                profile.profile_pic = request.FILES['profile_pics']
             profile.save()
 
             return redirect('user_login')
