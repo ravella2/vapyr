@@ -1,0 +1,1 @@
+web: gunicorn vapyr.wsgi --log-file -
